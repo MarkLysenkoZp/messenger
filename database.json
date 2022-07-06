@@ -1,0 +1,12 @@
+{
+  "pg": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "",
+    "host": "localhost",
+    "database": "messenger_prod",
+    "port": "5432",
+    "ssl": "false",
+    "schema": "public"
+  }
+}
