@@ -18,9 +18,9 @@ exports.up = function(db, callback) {
   db.createTable('messages', {
     columns: {
       id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      sender_id: 'integer',
-      recipient_id: 'integer',
-      time: 'integer',
+      sender_id: 'int',
+      recipient_id: 'int',
+      time: 'int',
       status: 'text',
       message: 'text',
       
@@ -30,7 +30,7 @@ exports.up = function(db, callback) {
 };
 
 exports.down = function(db, callback) {
-  db.dropTable('message', { ifExists: true }, callback);
+  db.dropTable('messages', { ifExists: true }, callback);
 };
 
 exports._meta = {

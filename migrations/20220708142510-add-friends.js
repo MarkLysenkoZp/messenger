@@ -17,8 +17,8 @@ exports.up = function(db, callback) {
   db.createTable('friends', {
     columns: {
       id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      contact_id: 'integer',
-      user_id: 'integer',
+      contact_id: 'int',
+      user_id: 'int',
     },
     ifNotExists: true
   }, callback);

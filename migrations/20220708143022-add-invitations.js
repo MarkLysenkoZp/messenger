@@ -18,8 +18,8 @@ exports.up = function(db, callback) {
   db.createTable('invitations', {
     columns: {
       id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      inviter_id: 'integer',
-      invited_id: 'integer',
+      inviter_id: 'int',
+      invited_id: 'int',
       status: 'string',
     },
     ifNotExists: true
