@@ -28,15 +28,6 @@ exports.down = function(db, callback) {
   db.dropTable('friends', { ifExists: true }, callback);
 };
 
-
-exports.up = function(db) {
-  return null;
-};
-
-exports.down = function(db) {
-  return null;
-};
-
 exports._meta = {
   "version": 1
 };
