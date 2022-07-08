@@ -13,26 +13,30 @@ exports.setup = function(options, seedLink) {
   type = dbm.dataType;
   seed = seedLink;
 };
-
 exports.up = function(db, callback) {
-  db.createTable('messages', {
+  db.createTable('friends', {
     columns: {
       id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      sender_id: 'integer',
-      recipient_id: 'integer',
-      time: 'integer',
-      status: 'text',
-      message: 'text',
-      
+      contact_id: 'integer',
+      user_id: 'integer',
     },
     ifNotExists: true
   }, callback);
 };
 
 exports.down = function(db, callback) {
-  db.dropTable('message', { ifExists: true }, callback);
+  db.dropTable('friends', { ifExists: true }, callback);
+};
+
+
+exports.up = function(db) {
+  return null;
+};
+
+exports.down = function(db) {
+  return null;
 };
 
 exports._meta = {
   "version": 1
-};f
+};

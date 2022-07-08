@@ -15,18 +15,27 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, callback) {
-  db.createTable('friends', {
+  db.createTable('invitations', {
     columns: {
       id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      contact_id: 'integer',
-      user_id: 'integer',
+      inviter_id: 'integer',
+      invited_id: 'integer',
+      status: 'string',
     },
     ifNotExists: true
   }, callback);
 };
 
 exports.down = function(db, callback) {
-  db.dropTable('friends', { ifExists: true }, callback);
+  db.dropTable('invitations', { ifExists: true }, callback);
+};
+
+exports.up = function(db) {
+  return null;
+};
+
+exports.down = function(db) {
+  return null;
 };
 
 exports._meta = {
