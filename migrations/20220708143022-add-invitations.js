@@ -17,8 +17,7 @@ exports.setup = function(options, seedLink) {
 db.createTable('invitations', {
   columns: {
     id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-    inviter_id:
-    {
+    _inviter_id: {
       type: 'int',
       unsigned: true,
       length: 10,
@@ -32,10 +31,11 @@ db.createTable('invitations', {
         },
         mapping: {
           inviter_id: 'id'
-         }
- }  },
- invited_id:
-    {
+        }
+      }
+    },
+   
+    _invited_id: {
       type: 'int',
       unsigned: true,
       length: 10,
@@ -49,10 +49,11 @@ db.createTable('invitations', {
         },
         mapping: {
           user_id: 'id'
-         }
- }  },
-    status:
-    {
+        }
+      }
+    },
+ 
+    _status: {
       type: 'string',
       unsigned: true,
       length: 10,
@@ -64,11 +65,12 @@ db.createTable('invitations', {
           onDelete: 'CASCADE',
           onUpdate: 'RESTRICT'
         },
-        mapping: {
-         
-         }
- }  }
+        mapping: {}
+      }
+    },
+    
   },
+  
   ifNotExists: true
 }, callback);
 exports.down = function(db, callback) {
