@@ -17,13 +17,15 @@
     "cookie-parser": "~1.4.4",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
-    "debug": "~2.6.9",
+    "debug": "^2.6.9",
     "dotenv": "^16.0.1",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.21.3"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",

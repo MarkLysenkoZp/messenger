@@ -5,7 +5,8 @@
  */
 
 import app from './app';
-import debug from 'debug';
+import Debug from 'debug';
+const debug = Debug("Messenger");
 import http from 'http';
 
 /**
