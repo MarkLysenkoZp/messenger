@@ -13,16 +13,47 @@ exports.setup = function(options, seedLink) {
   type = dbm.dataType;
   seed = seedLink;
 };
-exports.up = function(db, callback) {
-  db.createTable('friends', {
-    columns: {
-      id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      contact_id: 'int',
-      user_id: 'int',
-    },
-    ifNotExists: true
-  }, callback);
-};
+db.createTable('friends', {
+  columns: {
+    id: { type: 'bigint', primaryKey: true, autoIncrement: true },
+    contact_id:
+    {
+      type: 'int',
+      unsigned: true,
+      length: 10,
+      notNull: true,
+      foreignKey: {
+        name: 'friends_contact_id_fk',
+        table: 'users',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: {
+            contact_id: 'id'
+         }
+ }  },
+ user_id:
+    {
+      type: 'int',
+      unsigned: true,
+      length: 10,
+      notNull: true,
+      foreignKey: {
+        name: 'friends_user_id_fk',
+        table: 'users',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: {
+          user_id: 'id'
+        } 
+ }  }
+  },
+  ifNotExists: true
+}, callback);
+
 
 exports.down = function(db, callback) {
   db.dropTable('friends', { ifExists: true }, callback);
