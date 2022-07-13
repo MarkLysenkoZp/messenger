@@ -13,49 +13,53 @@ exports.setup = function(options, seedLink) {
   type = dbm.dataType;
   seed = seedLink;
 };
-db.createTable('friends', {
-  columns: {
-    _id: { type: 'bigint', primaryKey: true, autoIncrement: true },
 
-      _contact_id: {
-        type: 'int',
-        unsigned: true,
-        length: 10,
-        notNull: true,
-        foreignKey: {
-          name: 'friends_contact_id_fk',
-          table: 'users',
-          rules: {
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT'
-          },
-          mapping: {
-            contact_id: 'id'
+exports.up = function(db, callback) {
+  db.createTable('friends', {
+    columns: {
+      _id: { type: 'bigint', primaryKey: true, autoIncrement: true },
+  
+        _contact_id: {
+          type: 'int',
+          unsigned: true,
+          length: 10,
+          notNull: true,
+          foreignKey: {
+            name: 'friends_contact_id_fk',
+            table: 'users',
+            rules: {
+              onDelete: 'CASCADE',
+              onUpdate: 'RESTRICT'
+            },
+            mapping: {
+              contact_id: 'id'
+            }
           }
-        }
-      },
-    
-      _user_id: {
-        type: 'int',
-        unsigned: true,
-        length: 10,
-        notNull: true,
-        foreignKey: {
-          name: 'friends_user_id_fk',
-          table: 'users',
-          rules: {
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT'
-          },
-          mapping: {
-            user_id: 'id'
-          }
-        }
-      },
         },
-        ifNotExists: true
-      }, callback);
-
+      
+        _user_id: {
+          type: 'int',
+          unsigned: true,
+          length: 10,
+          notNull: true,
+          foreignKey: {
+            name: 'friends_user_id_fk',
+            table: 'users',
+            rules: {
+              onDelete: 'CASCADE',
+              onUpdate: 'RESTRICT'
+            },
+            mapping: {
+              user_id: 'id'
+            }
+          }
+        },
+          },
+          ifNotExists: true
+        }, callback);
+    }
+  {
+}
 
 exports.down = function(db, callback) {
   db.dropTable('friends', { ifExists: true }, callback);
@@ -64,3 +68,6 @@ exports.down = function(db, callback) {
 exports._meta = {
   "version": 1
 };
+  
+  
+
