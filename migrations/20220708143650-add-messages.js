@@ -14,11 +14,13 @@ var seed;
   seed = seedLink;
 };
 
-exports.up = function(db, callback){
-  db.createTable('messages', {
-    columns: {
-      id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      _sender_id: {
+exports.up = function(db, callback) {
+  db.createTable('messages',
+  {
+    
+     
+      sender_id: 
+      {
         type: 'int',
         unsigned: true,
         length: 10,
@@ -35,8 +37,9 @@ exports.up = function(db, callback){
           }
         }
       },
-     
-      _recipient_id: {
+   
+      _recipient_id: 
+      {
         type: 'int',
         unsigned: true,
         length: 10,
@@ -53,8 +56,9 @@ exports.up = function(db, callback){
           }
         }
       },
-  
-      _time: {
+
+      _time:
+      {
         type: 'int',
         unsigned: true,
         length: 10,
@@ -69,13 +73,31 @@ exports.up = function(db, callback){
           mapping: {}
         }
       },
-    
-      _status: {
-        type: 'text',
+
+      status:
+      {
+        type: 'string',
         unsigned: true,
         length: 10,
         notNull: true,
         foreignKey: {
+          name: 'invitations_inviter_id_fk',
+          table: 'users',
+          rules:{
+            onDelete: 'CASCADE',
+            onUpdate: 'RESTRICT'
+          },
+          mapping: {}
+        }
+      },
+      massage:
+      {
+        type: 'text',
+        unsigned: true,
+        length: 10,
+        notNull: true,
+        foreignKey: 
+        {
           name: '',
           table: '',
           rules: {
@@ -84,27 +106,9 @@ exports.up = function(db, callback){
           },
           mapping: {}
         }
-      },
-  
-      _massage: {
-        type: 'text',
-        unsigned: true,
-        length: 10,
-        notNull: true,
-        foreignKey: {
-          name: '',
-          table: '',
-          rules: {
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT'
-          },
-          mapping: {}
-        }
-      },
-      },
-      ifNotExists: true
-    }, callback);
-}
+      }  
+  }, callback );
+};
 
 exports.down = function(db, callback) {
   db.dropTable('messages', { ifExists: true }, callback);
