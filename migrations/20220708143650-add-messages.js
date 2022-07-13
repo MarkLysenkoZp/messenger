@@ -17,13 +17,12 @@ var seed;
 exports.up = function(db, callback) {
   db.createTable('messages',
   {
-    
-     
+    columns: {
+      id: { type: 'int', primaryKey: true, autoIncrement: true },
       sender_id: 
       {
         type: 'int',
         unsigned: true,
-        length: 10,
         notNull: true,
         foreignKey: {
           name: 'messages_sender_id_fk',
@@ -37,12 +36,10 @@ exports.up = function(db, callback) {
           }
         }
       },
-   
-      _recipient_id: 
+      recipient_id: 
       {
         type: 'int',
         unsigned: true,
-        length: 10,
         notNull: true,
         foreignKey: {
           name: 'messages_recipient_id_fk',
@@ -56,57 +53,16 @@ exports.up = function(db, callback) {
           }
         }
       },
-
-      _time:
+      time:
       {
         type: 'int',
         unsigned: true,
-        length: 10,
         notNull: true,
-        foreignKey: {
-          name: '',
-          table: '',
-          rules: {
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT'
-          },
-          mapping: {}
-        }
       },
-
-      status:
-      {
-        type: 'string',
-        unsigned: true,
-        length: 10,
-        notNull: true,
-        foreignKey: {
-          name: 'invitations_inviter_id_fk',
-          table: 'users',
-          rules:{
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT'
-          },
-          mapping: {}
-        }
-      },
-      massage:
-      {
-        type: 'text',
-        unsigned: true,
-        length: 10,
-        notNull: true,
-        foreignKey: 
-        {
-          name: '',
-          table: '',
-          rules: {
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT'
-          },
-          mapping: {}
-        }
-      }  
+      status: { type: 'string', notNull: true },
+      massage: { type: 'text', notNull: true },
+    },
+    ifNotExists: true
   }, callback );
 };
 

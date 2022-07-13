@@ -15,45 +15,43 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, callback) {
-  db.createTable( 'friends',{
-        contact_id:
-        {
-          type: 'int',
-          unsigned: true,
-          length: 10,
-          notNull: true,
-          foreignKey: {
-            name: 'friends_contact_id_fk',
-            table: 'users',
-            rules: {
-              onDelete: 'CASCADE',
-              onUpdate: 'RESTRICT'
-            },
-            mapping: {
-              contact_id: 'id'
-            }
+  db.createTable('friends', {
+    columns: {
+      id: { type: 'int', primaryKey: true, autoIncrement: true },
+      contact_id: {
+        type: 'int',
+        unsigned: true,
+        notNull: true,
+        foreignKey: {
+          name: 'friends_contact_id_fk',
+          table: 'users',
+          rules: {
+            onDelete: 'CASCADE',
+            onUpdate: 'RESTRICT'
+          },
+          mapping: { contact_id: 'id' }
+        }
+      },
+      user_id:
+      {
+        type: 'int',
+        unsigned: true,
+        notNull: true,
+        foreignKey: {
+          name: 'friends_user_id_fk',
+          table: 'users',
+          rules: {
+            onDelete: 'CASCADE',
+            onUpdate: 'RESTRICT'
+          },
+          mapping: {
+            user_id: 'id'
           }
-        },
-          user_id:
-          {
-            type: 'int',
-            unsigned: true,
-            length: 10,
-            notNull: true,
-            foreignKey:{
-              name: 'friends_user_id_fk',
-              table: 'users',
-              rules: {
-                onDelete: 'CASCADE',
-                onUpdate: 'RESTRICT'
-              },
-
-              mapping: {
-                user_id: 'id'
-              }
-            }
-          }
-  }, callback );
+        }
+      }
+    },
+    ifNotExists: true
+  }, callback);
 };
 
 exports.down = function(db, callback) {

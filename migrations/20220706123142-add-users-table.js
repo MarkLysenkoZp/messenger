@@ -17,13 +17,13 @@ exports.setup = function(options, seedLink) {
 exports.up = function(db, callback) {
   db.createTable('users', {
     columns: {
-      id: { type: 'bigint', primaryKey: true, autoIncrement: true },
-      email: 'string',
-      password: 'string',
-      nickname: 'string',
-      phone: 'string'
+      id: { type: 'int', primaryKey: true, autoIncrement: true },
+      email: { type: 'string', notNull: true },
+      password: { type: 'string', notNull: true },
+      nickname: { type: 'string', notNull: true },
+      phone: { type: 'string', notNull: true },
     },
-    ifNotExists: true
+    ifNotExists: true,
   }, callback);
 };
 
