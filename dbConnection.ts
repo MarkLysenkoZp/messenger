@@ -1,11 +1,20 @@
 import { Sequelize } from 'sequelize';
 import Debug from 'debug';
-const debug = Debug("Messenger");
+const debug = Debug('Messenger');
+import 'dotenv/config';
+import { loadEnv, env } from './env';
 
-const sequelize = new Sequelize('messenger_development', 'postgres', '', {
-  host: 'localhost',
-  dialect: 'postgres',
-});
+loadEnv(); // Executed synchronously before the rest of your app loads
+
+const sequelize = new Sequelize(
+  env.DB_NAME,
+  env.DB_USER,
+  env.DB_PASSWORD,
+  {
+    host: env.DB_HOST,
+    dialect: 'postgres',
+  }
+);
 
 const testConnection = async () => {
   try {
