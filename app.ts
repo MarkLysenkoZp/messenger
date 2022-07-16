@@ -4,7 +4,8 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
-import router from './routes/index';
+import indexRouter from './routes/index';
+import signupRouter from './routes/signup';
 
 const app: Express = express();
 
@@ -18,7 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', router);
+app.use('/', indexRouter);
+app.use('/', signupRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: any) => {
