@@ -6,7 +6,7 @@ import { loadEnv, env } from './env';
 
 loadEnv(); // Executed synchronously before the rest of your app loads
 
-const sequelize = new Sequelize(
+export const sequelize = new Sequelize(
   env.DB_NAME,
   env.DB_USER,
   env.DB_PASSWORD,
@@ -16,7 +16,7 @@ const sequelize = new Sequelize(
   }
 );
 
-const testConnection = async () => {
+export const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
@@ -26,5 +26,3 @@ const testConnection = async () => {
     console.error(`Unable to connect to the database: ${error}`);
   }
 }
-
-export default testConnection;
