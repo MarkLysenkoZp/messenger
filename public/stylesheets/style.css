@@ -353,4 +353,8 @@ body{
     opacity: 1;
     pointer-events: auto;
   }
+
+  .error-txt {
+    color: red;
+  }
    

@@ -27,21 +27,44 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
     email: {
       type: new DataTypes.STRING(128),
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: {
+          msg: 'Please enter email'
+        }
+      }
     },
     password: {
       type: new DataTypes.STRING(128),
-      allowNull: true
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Please enter password'
+        },
+        notEmpty: {
+          msg: 'Please enter password'
+        },
+      }
     },
     nickname: {
       type: new DataTypes.STRING(128),
-      allowNull: true
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: {
+          msg: 'Please enter nickname'
+        },
+        notEmpty: {
+          msg: 'Please enter nickname'
+        },
+      }
     },
     phone: {
       type: new DataTypes.STRING(128),
@@ -56,3 +79,5 @@ User.init(
     sequelize // passing the `sequelize` instance is required
   }
 );
+
+export default User;

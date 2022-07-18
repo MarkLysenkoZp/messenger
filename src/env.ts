@@ -11,6 +11,7 @@ export const schema = {
       default: '',
     },
     DB_DIALECT: String,
+    JWT_PRIVATE_KEY: String
 };
 
 export let env: Env;

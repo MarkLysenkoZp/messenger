@@ -14,17 +14,12 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
+const User = require('../dist/models/User').default;
+
 exports.up = function(db, callback) {
-  db.createTable('users', {
-    columns: {
-      id: { type: 'int', primaryKey: true, autoIncrement: true },
-      email: { type: 'string', notNull: true },
-      password: { type: 'string', notNull: true },
-      nickname: { type: 'string', notNull: true },
-      phone: { type: 'string', notNull: true },
-    },
-    ifNotExists: true,
-  }, callback);
+  User.sync({ force: true });
+  callback();
+  return null;
 };
 
 exports.down = function(db, callback) {
