@@ -19,7 +19,7 @@ const User = require('../dist/models/User').default;
 exports.up = function(db, callback) {
   User.sync({ force: true });
   callback();
-  return null;
+  
 };
 
 exports.down = function(db, callback) {
