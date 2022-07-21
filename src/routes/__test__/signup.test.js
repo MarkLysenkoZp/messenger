@@ -15,7 +15,6 @@ describe('Signup router', () => {
     const response = await request(server).post("/signup")
      .send({ email: '', password: '', nickname: ''});
 
-    console.log('body', response.text); 
     const emailError = ' Please enter email';   
     const passwordError = 'Please enter password';
     const nicknameError = 'Please enter nickname';
