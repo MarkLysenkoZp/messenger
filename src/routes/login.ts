@@ -12,9 +12,7 @@ loginRouter.get('/login', async  (req: Request, res: Response) => {
 });
 
 loginRouter.post('/login', async (req: Request, res: Response) => {
-  console.log('body', req.body)
   const user = await User.findOne({ where: { email: req.body.email } });
-  console.log('user', user);
   if(user === null) {
     return res.render('login',  { errorMessage: 'User not Found'});
   }
@@ -31,7 +29,6 @@ loginRouter.post('/login', async (req: Request, res: Response) => {
   }
 
   const token = generateToken(user.id);
-  console.log('token', token)
 
   res.header('Authorization', token);
   res.redirect('/');

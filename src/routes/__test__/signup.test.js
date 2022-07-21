@@ -13,6 +13,16 @@ describe('Signup router', () => {
 
   test('It responds to POST method with empty fields', async () => {
     const response = await request(server).post("/signup")
+     .send({ email: '', password: '', nickname: ''});
+
+    const emailError = ' Please enter email';   
+    const passwordError = 'Please enter password';
+    const nicknameError = 'Please enter nickname';
+
+    expect(response.text.includes(emailError)).toEqual(true); 
+    expect(response.text.includes(passwordError)).toEqual(true); 
+    expect(response.text.includes(nicknameError)).toEqual(true); 
+    
     expect(response.statusCode).toBe(200);
   });
 });
