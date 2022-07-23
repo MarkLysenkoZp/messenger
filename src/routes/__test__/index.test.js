@@ -8,6 +8,6 @@ afterEach(() => {
 describe('index router', () => {
   test('It should respond to GET method', async () => {
     const response = await request(server).get("/");
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(302);
   });
 });
