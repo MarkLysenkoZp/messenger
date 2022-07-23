@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper" id="root">
+        <div id="react-root"></div>
         <section class="users">
             <header>
                 <div class="content">
@@ -77,7 +78,7 @@
                     <div class="stastus-dot"><i class="fas fa-circle"></i></div>
                 </header>
 
-            </div>
+            </section>
         </section>
 
         <div class="wrapper">
@@ -113,5 +114,7 @@
         </div>
     </div>
      <script src="javacript/users.js"></script>
+     <script>var exports = {};</script>
+     <script type="module" src="client/bundle.js"></script>
 </body>
 </html>

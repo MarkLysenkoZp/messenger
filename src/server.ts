@@ -13,7 +13,7 @@ import http from 'http';
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = process.env.PORT || '3000';
 app.set('port', port);
 
 /**
@@ -29,26 +29,6 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val: any) {
-  const p = parseInt(val, 10);
-
-  if (isNaN(p)) {
-    // named pipe
-    return val;
-  }
-
-  if (p >= 0) {
-    // port number
-    return p;
-  }
-
-  return false;
-}
 
 /**
  * Event listener for HTTP server "error" event.
