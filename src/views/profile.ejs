@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible " content="ie=edge">
     <title>Realtime Chat App | CodingNepal</title>
-    <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <body>
@@ -15,7 +15,7 @@
     <form action="/signup" method="post"> 
         <div class="field input">
             <label>Email</label>
-            <input name='email' type="text" placeholder="Enter your new login">
+            <input value="<%= user.email %>" name='email' type="text" placeholder="Enter your new login">
         </div>
         <div class="field input">
             <label>Password</label>
@@ -36,6 +36,6 @@
     </form>
 </section>
 </div>
-<script src="../public/javacript/pass-show-hide.js"></script>
+<script src="/javacript/pass-show-hide.js"></script>
 </body>
 </html>
