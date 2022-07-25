@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, callback) {
-  db.addColumn( 'users', 'avatar', { type: 'string' }, callback() );
+  db.addColumn( 'users', 'avatar', { type: 'string' }, callback);
 };
 
 exports.down = function(db, callback) {
