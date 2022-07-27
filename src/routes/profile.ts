@@ -10,8 +10,6 @@ loadEnv();
 
 import { auth } from '../middleware/auth';
 
-/* GET users listing. */
-
 profileRouter.get('/profile', auth, async  (req: Request, res: Response) => {
   const token = req.cookies.Authorization;
   const decoded: any  = verify(token, env.JWT_PRIVATE_KEY);
@@ -25,7 +23,6 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
   const user: any = await User.findOne({ where: { id: decoded.id } });
 
   try {
-
     user.email = req.body.email;
     user.password = req.body.password;
     if (req.body.password ) {

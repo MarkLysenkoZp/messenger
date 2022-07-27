@@ -23,7 +23,6 @@ exports.down = function(db, callback) {
   db.removeColumn('users', 'avatar', callback);
 };
 
-
 exports._meta = {
   "version": 1
 };
