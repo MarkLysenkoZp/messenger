@@ -10,9 +10,10 @@
 </head>
 <body>
       <div class="wrapper">
-<section class="form signup">
+<section class="form profile">
     <header>Realtime Chat App</header>
-    <form action="/signup" method="post"> 
+    <form action="/profile" method="post">
+        <div class="error-txt"><%= errorMessage %></div>
         <div class="field input">
             <label>Email</label>
             <input value="<%= user.email %>" name='email' type="text" placeholder="Enter your new login">
@@ -21,10 +22,6 @@
             <label>Password</label>
             <input name='password' type="password" placeholder="Enter your new password">
             <i class="fas fa-eye"></i>
-        </div>
-        <div class="field input">
-            <label>Confirm Password</label>
-            <input name='password' type="password" placeholder="Confirm your new password">
         </div>
         <div class="field ">
             <label>Select Image</label>
