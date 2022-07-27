@@ -1,12 +1,18 @@
 import React from 'react';
+import Users from './Users';
+import ChatArea from './ChatArea';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        This is a Reactjs App
-      </header>
-    </div>
+    <React.StrictMode>
+         <div className='wrapper'>
+            <Users />
+        </div>
+        <div className='wrapper'>
+            <ChatArea />
+        </div>
+    </React.StrictMode>
   );
 }
 
