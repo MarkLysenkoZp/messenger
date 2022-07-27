@@ -6,12 +6,9 @@ import 'dotenv/config';
 import { loadEnv, env } from '../env';
 import { hashPassword } from '../utils/authUtils';
 
-
 loadEnv();
 
-
 import { auth } from '../middleware/auth';
-
 
 /* GET users listing. */
 
@@ -28,17 +25,14 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
   const user: any = await User.findOne({ where: { id: decoded.id } });
 
   try {
-        console.log('user', user);
 
     user.email = req.body.email;
     user.password = req.body.password;
     if (req.body.password ) {
-        user.password = req.body.password;
+      user.password = req.body.password;
     }
-    console.log(user.email);
-    console.log(user.password)
-
     const isValid = await user.validate();
+    
     if(req.body.password){
       user.password = hashPassword(req.body.password);
     }
@@ -48,7 +42,5 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
 
     res.render('profile', { errorMessage: e.message, user});
   }
-
 });
-
 export default profileRouter;

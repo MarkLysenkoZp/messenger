@@ -14,7 +14,7 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-const User = require('../dist/models/User.js').default;
+const User = require('../dist/models/User').default;
 
 exports.up = function(db, callback) {
   User.sync({ force: true });
