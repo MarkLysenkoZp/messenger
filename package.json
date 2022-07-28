@@ -12,7 +12,9 @@
     "dev": "nodemon --watch src -e ts,ejs,tsx,js --exec npm run dev:start",
     "start": "node dist/server.js",
     "test": "jest --detectOpenHandles",
-    "build-client": "webpack"
+    "build-client": "webpack",
+    "migrate:up": "npx sequelize-cli db:migrate",
+    "migrate:down": "npx sequelize-cli db:migrate:undo"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -20,7 +22,6 @@
     "@testing-library/user-event": "^14.3.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
-    "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "debug": "^2.6.9",
     "dotenv": "^16.0.1",
@@ -62,6 +63,7 @@
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
+    "sequelize-cli": "^6.4.1",
     "shelljs": "^0.8.5",
     "superagent": "^8.0.0",
     "supertest": "^6.2.4",
