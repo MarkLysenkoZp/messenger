@@ -28,7 +28,7 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
       user.password = req.body.password;
     }
     const isValid = await user.validate();
-    
+
     if(req.body.password){
       user.password = hashPassword(req.body.password);
     }

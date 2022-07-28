@@ -25,13 +25,16 @@ function ChatArea() {
                     </div>
                 </div>
             </div>
+            <div className=".profile">
+             <input type="button" value="Profile" className="right"></input>   
+            </div >
             <form action="#" className="typing-area">
                 <input type="text" placeholder="Type  a message" />
                 <button><i className="fab fa-telegram-plane"></i></button>
             </form>
         </section>
-
     </div>
+    
   );
 }
 
