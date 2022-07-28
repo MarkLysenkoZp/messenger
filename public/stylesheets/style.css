@@ -121,12 +121,14 @@ body{
   border: 2px dashed black;
 }
 
-input.right {
+input.right, a.right {
   position: absolute;
   right: 2px;
   top: 2px;
 }
-
+a.right {
+  color: white;
+}
 
 /* Users List CSS Start */
 .users{
