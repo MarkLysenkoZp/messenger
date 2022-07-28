@@ -3,6 +3,9 @@ import React from 'react';
 function ChatArea() {
   return (
     <div className="wrapper">
+        <div>
+            <a href="/profile" className="right logout">Profile</a>
+        </div>
         <section className="chat-area">
             <header>
                 <a href="#" className="back-icon"><i className="fas fa-arrow-left"></i></a>
@@ -30,8 +33,8 @@ function ChatArea() {
                 <button><i className="fab fa-telegram-plane"></i></button>
             </form>
         </section>
-
     </div>
+    
   );
 }
 
