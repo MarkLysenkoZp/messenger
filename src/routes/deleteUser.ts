@@ -10,7 +10,7 @@ deleteUserRouter.post('/deleteCurrentUser', auth, async  (req: Request, res: Res
   const token = req.cookies.Authorization;
   const decoded: any  = verify(token, env.JWT_PRIVATE_KEY);
   const user: any = await User.findOne({ where: { id: decoded.id } });
-  await  user.destroy()
+  await user.destroy()
   res.redirect('/signup');
 });
 export default deleteUserRouter;
