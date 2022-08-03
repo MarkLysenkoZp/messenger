@@ -10,6 +10,7 @@ import loginRouter from './routes/login';
 import profileRouter from './routes/profile';
 import logoutRouter from './routes/logout';
 import deleteUserRouter from './routes/deleteUser';
+import userInfoRouter from './routes/api/userInfo';
 
 const app: Express = express();
 
@@ -29,6 +30,7 @@ app.use('/', loginRouter);
 app.use('/', profileRouter);
 app.use('/', logoutRouter);
 app.use('/', deleteUserRouter);
+app.use('/', userInfoRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: any) => {

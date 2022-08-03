@@ -2,10 +2,9 @@
 
 To start application:
 1. npm install
-2. Create DB: npx db-migrate db:create messenger_development
+2. Create DB: npx sequelize-cli db:create
 3. Run migrations: 
- - (if run for the very first time) npx db-migrate up -c 1
- - npx db-migrate up
+ - npm run migrate:up
 3. npm run dev
 4. http://localhost:3000
 

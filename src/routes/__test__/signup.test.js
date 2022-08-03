@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 const request = require("supertest");
 const server = require("../../../dist/server").default;
 
