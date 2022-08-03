@@ -7,14 +7,17 @@ import {
 } from 'sequelize';
 
 import { sequelize } from '../dbConnection';
+import Friend from './Friend';
+import Invitation from './Invitation';
+import Message from './Message';
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+class User extends Model {
   // id can be undefined during creation when using `autoIncrement`
   declare id: CreationOptional<number>;
   declare email: string;
   declare password: string;
   declare nickname: string;
-  declare phone: string;
+  declare avatar: string;
 
   // timestamps!
   // createdAt can be undefined during creation
@@ -66,18 +69,28 @@ User.init(
         },
       }
     },
-    phone: {
+    avatar: {
       type: new DataTypes.STRING(128),
-      allowNull: true
+      allowNull: true,
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     confirmedAt: DataTypes.DATE,
   },
   {
+    modelName: 'User',
     tableName: 'users',
     sequelize // passing the `sequelize` instance is required
   }
 );
+
+
+User.hasMany(Friend);
+User.hasMany(Invitation);
+User.hasMany(Message);
+
+Friend.belongsTo(User);
+Invitation.belongsTo(User);
+Message.belongsTo(User);
 
 export default User;

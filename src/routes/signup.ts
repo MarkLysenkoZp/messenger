@@ -14,7 +14,7 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
     const user = User.build({
       email: req.body.email,
       nickname: req.body.nickname,
-      phone: req.body.phone,
+      avatar: req.body.avatar,
       password: req.body.password
     });
 

@@ -14,7 +14,6 @@ export const auth = (req: Request, res: Response, next: any) => {
   try {
     // if can verify the token, set req.user and pass to next middleware
     const decoded = verify(token, env.JWT_PRIVATE_KEY);
-    console.log('DECODED', decoded);
     next();
   } catch (ex) {
     // if invalid token
