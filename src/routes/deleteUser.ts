@@ -4,10 +4,9 @@ import User from '../models/User';
 import { verify} from 'jsonwebtoken';
 import 'dotenv/config';
 import { loadEnv, env } from '../env';
+import { auth } from '../middleware/auth';
 
 loadEnv();
-
-import { auth } from '../middleware/auth';
 
 deleteUserRouter.post('/deleteCurrentUser', auth, async  (req: Request, res: Response) => {
   const token = req.cookies.Authorization;
@@ -16,5 +15,4 @@ deleteUserRouter.post('/deleteCurrentUser', auth, async  (req: Request, res: Res
   await  user.destroy()
   res.redirect('/signup');
 });
-
 export default deleteUserRouter;
