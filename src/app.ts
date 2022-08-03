@@ -3,7 +3,6 @@ import express, { Express, Request, Response } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-
 import indexRouter from './routes/index';
 import signupRouter from './routes/signup';
 import loginRouter from './routes/login';
@@ -17,13 +16,11 @@ const app: Express = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/', signupRouter);
 app.use('/', loginRouter);
