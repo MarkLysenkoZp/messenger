@@ -2,7 +2,6 @@ import express, { Express, Request, Response, Router } from 'express';
 const app: Express = express();
 const indexRouter: Router = express.Router();
 import { testConnection } from '../dbConnection';
-
 import { auth } from '../middleware/auth';
 
 /* GET users listing. */

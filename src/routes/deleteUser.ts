@@ -5,7 +5,6 @@ import { verify } from 'jsonwebtoken';
 import 'dotenv/config';
 import { loadEnv, env } from '../env';
 import { auth } from '../middleware/auth';
-
 loadEnv();
 deleteUserRouter.post('/deleteCurrentUser', auth, async  (req: Request, res: Response) => {
   const token = req.cookies.Authorization;
