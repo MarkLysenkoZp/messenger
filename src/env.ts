@@ -11,7 +11,10 @@ export const schema = {
       default: '',
     },
     DB_DIALECT: String,
-    JWT_PRIVATE_KEY: String
+    JWT_PRIVATE_KEY: String,
+    AWS_ACCESS_KEY: String,
+    AWS_SECRET_KEY: String,
+    AWS_BUCKET: String
 };
 
 export let env: Env;
