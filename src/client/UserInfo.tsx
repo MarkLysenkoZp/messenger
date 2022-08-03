@@ -3,11 +3,13 @@ import axios from 'axios';
 
 function UserInfo() {
   const [nickname, setNickname] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       const { data } = await axios.get('/api/userinfo');
       setNickname(data.nickname);
+      setAvatar(data.avatar);
     };
 
     fetchUserInfo();
@@ -16,7 +18,7 @@ function UserInfo() {
   return (
     <header>
         <div className="content">
-            <img src="images/img6.jpg" alt=""/>
+            <img src={avatar} alt="avatar"/>
             <div className="details">
                 <span>{nickname}</span>
             </div>

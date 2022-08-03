@@ -12,7 +12,7 @@
     <div class="wrapper">
         <section class="form">
             <header>Realtime Chat App</header>
-            <form action="/profile" method="post">
+            <form action="/profile" method="post" enctype="multipart/form-data">
                 <div class="error-txt"><%= errorMessage %></div>
                 <div class="field input">
                     <label>Email</label>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="field ">
                     <label>Select Image</label>
-                    <input type="file" value="Chose avarat">
+                    <input type="file" placeholder="Choose avatar" name="avatar">
                 </div>
                 <div class="field button">
                 <input type="submit" value="Continue to Chat">
