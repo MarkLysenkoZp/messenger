@@ -3,6 +3,7 @@ import express, { Express, Request, Response } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+
 import fileUpload from 'express-fileupload';
 
 import indexRouter from './routes/index';
@@ -10,14 +11,13 @@ import signupRouter from './routes/signup';
 import loginRouter from './routes/login';
 import profileRouter from './routes/profile';
 import logoutRouter from './routes/logout';
+import deleteUserRouter from './routes/deleteUser';
 import userInfoRouter from './routes/api/userInfo';
 
 const app: Express = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +32,7 @@ app.use('/', signupRouter);
 app.use('/', loginRouter);
 app.use('/', profileRouter);
 app.use('/', logoutRouter);
+app.use('/', deleteUserRouter);
 app.use('/', userInfoRouter);
 
 // catch 404 and forward to error handler
