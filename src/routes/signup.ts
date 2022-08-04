@@ -1,7 +1,6 @@
 import express, { Express, Request, Response, Router } from 'express';
 const app: Express = express();
 const signupRouter: Router = express.Router();
-
 import User from '../models/User';
 import { hashPassword } from '../utils/authUtils';
 
@@ -21,10 +20,9 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
     const isValid = await user.validate();
     user.password = hashPassword(req.body.password);
     await user.save();
-    res.redirect('/')
+    res.redirect('/login?success=ok');
   } catch(e:any) {
     res.render('signup', { errorMessage: e.message });
   }
 });
-
 export default signupRouter;

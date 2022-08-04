@@ -1,7 +1,6 @@
 import express, { Request, Response, Router } from 'express';
 import { verify } from 'jsonwebtoken';
 import 'dotenv/config';
-
 import User from '../models/User';
 import { auth } from '../middleware/auth';
 import { loadEnv, env } from '../env';
@@ -39,7 +38,7 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
 
     await user.validate();
     await user.save();
-    res.redirect('/')
+    res.redirect('/?success=ok')
   } catch(e: any) {
     res.render('profile', { errorMessage: e.message, user});
   }
