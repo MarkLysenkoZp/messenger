@@ -365,4 +365,8 @@ a.right {
   .error-txt {
     color: red;
   }
+
+  .success-txt {
+    color: green;
+  }
    

@@ -3,9 +3,7 @@ import express, { Express, Request, Response } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-
 import fileUpload from 'express-fileupload';
-
 import indexRouter from './routes/index';
 import signupRouter from './routes/signup';
 import loginRouter from './routes/login';
@@ -50,5 +48,4 @@ app.use((err: any, req: Request, res: Response) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
 export default app;

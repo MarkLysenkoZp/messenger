@@ -1,14 +1,16 @@
 import express, { Express, Request, Response, Router } from 'express';
 import { compareSync } from 'bcrypt';
-
 const loginRouter: Router = express.Router();
-
 import User from '../models/User';
 import { generateToken } from '../utils/authUtils';
 
-
 loginRouter.get('/login', async  (req: Request, res: Response) => {
-  res.render('login', { errorMessage: '' });
+  const success = 'You have been registered successfully. Please, login to continue';
+  if (req.param("success")) {
+    res.render('login',{success, errorMessage: '' })
+  }else{
+    res.render('login', { errorMessage: '' });
+  }
 });
 
 loginRouter.post('/login', async (req: Request, res: Response) => {
@@ -29,7 +31,6 @@ loginRouter.post('/login', async (req: Request, res: Response) => {
   }
 
   const token = generateToken(user.id);
-
   res.cookie('Authorization', token, { expires: new Date(Date.now() + 60*60*24 * 1000) });
   res.redirect('/');
 
