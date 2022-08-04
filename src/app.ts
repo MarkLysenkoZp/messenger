@@ -13,11 +13,15 @@ import profileRouter from './routes/profile';
 import logoutRouter from './routes/logout';
 import deleteUserRouter from './routes/deleteUser';
 import userInfoRouter from './routes/api/userInfo';
+import searchUsersRouter from './routes/api/searchUsers';
+import addFriendRouter from './routes/api/addFriend';
+import fetchFriendsRouter from './routes/api/fetchFriends';
 
 const app: Express = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('query parser', 'simple')
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +38,9 @@ app.use('/', profileRouter);
 app.use('/', logoutRouter);
 app.use('/', deleteUserRouter);
 app.use('/', userInfoRouter);
+app.use('/', searchUsersRouter);
+app.use('/', addFriendRouter);
+app.use('/', fetchFriendsRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: any) => {

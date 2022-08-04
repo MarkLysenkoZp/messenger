@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { ListItemType } from './types';
 
-function UserInfo() {
-  const [nickname, setNickname] = useState('');
-  const [avatar, setAvatar] = useState('');
-
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      const { data } = await axios.get('/api/userinfo');
-      setNickname(data.nickname);
-      setAvatar(data.avatar);
-    };
-
-    fetchUserInfo();
-  }, []);
-
+function UserInfo(user: ListItemType) {
   return (
     <header>
         <div className="content">
-            <img src={avatar} alt="avatar"/>
+            <img src={user.avatar} alt="avatar"/>
             <div className="details">
-                <span>{nickname}</span>
+                <span>{user.nickname}</span>
             </div>
         </div>
         <a href="/logout" className="logout">Logout</a>

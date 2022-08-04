@@ -5,12 +5,12 @@
  import React from 'react';
  import { render } from '@testing-library/react';
  import '@testing-library/jest-dom';
- import UserListItem from '../UserListItem';
+ import FriendListItem from '../FriendListItem';
  
  describe('UserListItem', () => {
    test('Renders without errors', () => {
      expect(() => {
-       render(<UserListItem/>);
+       render(<FriendListItem {...{nickname: 'John', avatar: '/src/img'}} />);
      }).not.toThrow();
    });
  });

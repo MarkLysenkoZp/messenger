@@ -1,12 +1,13 @@
 import React from 'react';
+import { ListItemType } from './types';
 
-function UserListItem() {
+function FriendListItem(data: ListItemType) {
   return (
     <header>
         <div className="content">
-            <img src="images/img5.jpg"alt=" " />
+            <img src={data.avatar} alt="avatar" />
             <div className="details">
-                <span>Sanya</span>
+                <span>{data.nickname}</span>
                 <p>This is test message</p>
             </div>
         </div>
@@ -15,4 +16,4 @@ function UserListItem() {
   );
 }
 
-export default UserListItem;
+export default FriendListItem;
