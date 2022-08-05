@@ -1,14 +1,11 @@
 import {
   Model,
   DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
 
 import { sequelize } from '../dbConnection';
 import Friend from './Friend';
-import Invitation from './Invitation';
 import Message from './Message';
 
 class User extends Model {
@@ -25,6 +22,8 @@ class User extends Model {
   // updatedAt can be undefined during creation
   declare updatedAt: CreationOptional<Date>;
   declare confirmedAt: CreationOptional<Date>;
+  // This is a stub for typescript checker
+  getFriends: any;
 }
 
 User.init(
@@ -80,15 +79,13 @@ User.init(
   {
     modelName: 'User',
     tableName: 'users',
-    sequelize // passing the `sequelize` instance is required
+    sequelize
   }
 );
 
-
-User.hasMany(Friend, { foreignKey: 'userId' });
+User.belongsToMany(User, { through: Friend, as: "Friends", foreignKey: "userId", otherKey: 'friendId' });
 User.hasMany(Message, { foreignKey: 'userId' });
 
-Friend.belongsTo(User,  { foreignKey: 'userId' });
 Message.belongsTo(User, { foreignKey: 'userId' });
 
 export default User;

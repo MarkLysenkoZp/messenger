@@ -24,7 +24,6 @@ function SearchListItem(user: ListItemType) {
         <a href="#" onClick={addFriend} className="logout">
           { friendAdded ? 'Friend Added' : 'Add To Friends' }
         </a>
-        <a href="#" className="logout fab fa-telegram-plane"></a>
     </header>
   );
 }

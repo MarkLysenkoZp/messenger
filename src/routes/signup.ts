@@ -1,10 +1,9 @@
-import express, { Express, Request, Response, Router } from 'express';
-const app: Express = express();
+import express, { Request, Response, Router } from 'express';
 const signupRouter: Router = express.Router();
 import User from '../models/User';
 import { hashPassword } from '../utils/authUtils';
 
-signupRouter.get('/signup', async  (req: Request, res: Response) => {
+signupRouter.get('/signup', async  (_: Request, res: Response) => {
   res.render('signup', { errorMessage: '' });
 });
 
@@ -17,7 +16,7 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
       password: req.body.password
     });
 
-    const isValid = await user.validate();
+    await user.validate();
     user.password = hashPassword(req.body.password);
     await user.save();
     res.redirect('/login?success=ok');
