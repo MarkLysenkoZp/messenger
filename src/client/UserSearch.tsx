@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function UserSearch(props: any) {
-  // TODO: refactor this using state
-  const searchButtonHandler = () => {
-    const searchBar: any = document.querySelector(".search input");
-    const searchIcon: any = document.querySelector(".search button");
+  const [searchButtonActive, toggleSearchButtonState] = useState(false);
+  const searchInput: any = document.getElementById('searchInput');
 
-    searchBar.classList.toggle("show");
-    searchIcon.classList.toggle("active");
-    searchBar.focus();
-    if(searchBar.classList.contains("active")){
-      searchBar.value = "";
-      searchBar.classList.remove("active");
-    }
+  const searchButtonClickHandler = () => {
+    // TODO: fire onchange for searchInput to reset Search List
+    (searchButtonActive) ? toggleSearchButtonState(false) : toggleSearchButtonState(true);
   }
 
+  const searchButtonClass = searchButtonActive ? 'active' : '';
+  const searchInputClass = searchButtonActive ? 'active show' : '';
+
   return (
-    <div className="search" onClick={() => { searchButtonHandler() }}>
-      <span className="text">Select an user to start chat</span>
-      <input type="text" onChange={props.onSearch} placeholder="Enter name to search..." />
-      <button ><i className="fas fa-search"></i></button>
+    <div className="search">
+      <span className="text">Search users to add new friends</span>
+      <input id='searchInput' className={searchInputClass} type="text" onChange={props.onSearch} placeholder="Enter name to search..." />
+      <button className={searchButtonClass} onClick={searchButtonClickHandler}>
+        <i className="fas fa-search"></i>
+      </button>
     </div>
   );
 }

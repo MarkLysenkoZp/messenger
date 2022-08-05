@@ -7,9 +7,9 @@ import { generateToken } from '../utils/authUtils';
 loginRouter.get('/login', async  (req: Request, res: Response) => {
   const success = 'You have been registered successfully. Please, login to continue';
   if (req.param("success")) {
-    res.render('login',{success, errorMessage: '' })
+    res.render('login', { success, errorMessage: '' })
   }else{
-    res.render('login', { errorMessage: '' });
+    res.render('login', { success: '', errorMessage: '' });
   }
 });
 

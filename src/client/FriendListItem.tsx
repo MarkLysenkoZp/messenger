@@ -12,6 +12,7 @@ function FriendListItem(data: ListItemType) {
             </div>
         </div>
         <div className="stastus-dot"><i className="fas fa-circle"></i></div>
+        <a href="#" className="logout fab fa-telegram-plane"></a>
     </header>
   );
 }
