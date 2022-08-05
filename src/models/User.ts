@@ -85,12 +85,10 @@ User.init(
 );
 
 
-User.hasMany(Friend);
-User.hasMany(Invitation);
-User.hasMany(Message);
+User.hasMany(Friend, { foreignKey: 'userId' });
+User.hasMany(Message, { foreignKey: 'userId' });
 
-Friend.belongsTo(User);
-Invitation.belongsTo(User);
-Message.belongsTo(User);
+Friend.belongsTo(User,  { foreignKey: 'userId' });
+Message.belongsTo(User, { foreignKey: 'userId' });
 
 export default User;

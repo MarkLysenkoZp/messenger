@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from 'express';
-const userInfoRouter: Router = express.Router();
+const addFriendRouter: Router = express.Router();
 import User from '../../models/User';
 import Friend from '../../models/Friend';
 import { verify } from 'jsonwebtoken';
@@ -10,11 +10,15 @@ loadEnv();
 
 import { auth } from '../../middleware/auth';
 
-userInfoRouter.get('/api/userinfo', auth, async  (req: Request, res: Response) => {
+addFriendRouter.post('/api/add_friend', auth, async  (req: Request, res: Response) => {
   const token = req.cookies.Authorization;
   const decoded: any  = verify(token, env.JWT_PRIVATE_KEY);
-  const user = await User.findOne({ where: { id: decoded.id } });
-  res.json(user);
+  const user: any = await User.findOne({ where: { id: decoded.id } });
+
+  await Friend.create({ userId: user.id, friendId: req.body.userId });
+  await Friend.create({ userId: req.body.userId, friendId: user.id });
+
+  res.status(200).end();
 });
 
-export default userInfoRouter;
+export default addFriendRouter;
