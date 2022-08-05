@@ -35,7 +35,6 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
       const store: any = await s3.upload(params).promise();
       user.avatar = store.Location;
     }
-
     await user.validate();
     await user.save();
     res.redirect('/?success=ok')

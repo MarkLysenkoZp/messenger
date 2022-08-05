@@ -6,11 +6,5 @@ import { auth } from '../middleware/auth';
 
 indexRouter.get('/', auth, async  (req: Request, res: Response) => {
   await testConnection();
-  const success = 'Changes saved successfully';
-  if (req.param("success")) {
-    res.render('index', { success })
-  }else{
-    res.render('index',{ success: ''});
-  }
 });
 export default indexRouter;

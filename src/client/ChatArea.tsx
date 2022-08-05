@@ -18,13 +18,10 @@ function ChatArea() {
             <div className="chat-box">
                 <div className="chat outgoing">
                     <div className="details">
-                        <p>Hey, how are you, man?</p>
                     </div>
                 </div>
                 <div className="chat incoming">
-                    <img src="images/img1.jpeg" alt="" />
                     <div className="details">
-                        <p>Hi, I'm okay, dude</p>
                     </div>
                 </div>
             </div>
