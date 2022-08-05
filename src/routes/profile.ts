@@ -38,9 +38,10 @@ profileRouter.post('/profile', auth, async  (req: Request, res: Response) => {
 
     await user.validate();
     await user.save();
-    res.redirect('/?success=ok')
+    res.redirect('/')
   } catch(e: any) {
     res.render('profile', { errorMessage: e.message, user});
   }
 });
+
 export default profileRouter;
