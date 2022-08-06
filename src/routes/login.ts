@@ -5,12 +5,12 @@ import User from '../models/User';
 import { generateToken } from '../utils/authUtils';
 
 loginRouter.get('/login', async  (req: Request, res: Response) => {
-  const success = 'You have been registered successfully. Please, login to continue';
-  if (req.param("success")) {
-    res.render('login', { success, errorMessage: '' })
-  }else{
-    res.render('login', { success: '', errorMessage: '' });
+  let success = "";
+  if (req.query.success) {
+    success = 'You have been registered successfully. Please, login to continue';
   }
+  
+  res.render('login', { errorMessage: '', success });
 });
 
 loginRouter.post('/login', async (req: Request, res: Response) => {
@@ -35,4 +35,5 @@ loginRouter.post('/login', async (req: Request, res: Response) => {
   res.redirect('/');
 
 });
+
 export default loginRouter;
