@@ -39,7 +39,9 @@ Message.init(
         model: User,
         // This is the column name of the referenced model
         key: 'id',
-      }
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade'
     },
     recipientId: {
       type: DataTypes.INTEGER,
@@ -48,7 +50,9 @@ Message.init(
         model: User,
         // This is the column name of the referenced model
         key: 'id',
-      }
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade'
     },
     message: DataTypes.TEXT,
     status: DataTypes.STRING,

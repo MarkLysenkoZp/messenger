@@ -3,12 +3,12 @@ import UserInfo from './UserInfo';
 import UserSearch from './UserSearch';
 import FriendListItem from './FriendListItem';
 import SearchListItem from './SearchListItem';
-import { ListItemType } from './types';
+import { IFriendListItem, ISearchListItem, UsersParams } from './types';
 import { emptyUser, TERM_MIN_LENGHT } from './constants';
 
 import axios from 'axios';
 
-function Users() {
+function Users(data: UsersParams) {
   const [currentUser, setCurrentUser] = useState(emptyUser);
   const [friends, setFriends] = useState([]);
   const [users, setUsers] = useState([]);
@@ -53,14 +53,19 @@ function Users() {
     <section className="users">
       <UserInfo {...currentUser} />
       <UserSearch onSearch={onSearch} />
+      
+      {/* Friends List */}
       <section className="users-list">
-        {friends.map((friend: ListItemType) => {
+        {friends.map((friend: IFriendListItem) => {
+          friend.setIsFriendShown = data.setIsFriendShown;
+          friend.setFriendInChat = data.setFriendInChat;
           return <FriendListItem {...friend} />
         })}
       </section>
 
+      {/* Search List */}
       <section className="users">
-        {users.map((user: ListItemType) => {
+        {users.map((user: ISearchListItem) => {
           return <SearchListItem {...user} />
         })}
       </section>

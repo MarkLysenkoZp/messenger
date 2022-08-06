@@ -1,11 +1,11 @@
 import React from 'react';
-import { ListItemType } from './types';
+import { IUserListItem } from './types';
 
-function UserInfo(user: ListItemType) {
+function UserInfo(user: IUserListItem) {
   return (
     <header>
         <div className="content">
-            <img src={user.avatar} alt="avatar"/>
+            { user.avatar ? <img src={user.avatar} alt="avatar"/> : '' } 
             <div className="details">
                 <span>{user.nickname}</span>
             </div>
