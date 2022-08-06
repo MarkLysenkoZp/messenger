@@ -16,7 +16,7 @@ loginRouter.get('/login', async  (req: Request, res: Response) => {
 loginRouter.post('/login', async (req: Request, res: Response) => {
   const user = await User.findOne({ where: { email: req.body.email } });
   if(user === null) {
-    return res.render('login',  { errorMessage: 'User not Found'});
+    return res.render('login',  { errorMessage: 'User not Found', success: '' });
   }
 
   // comparing passwords
@@ -27,7 +27,7 @@ loginRouter.post('/login', async (req: Request, res: Response) => {
 
   // checking if password was valid and send response accordingly
   if (!passwordIsValid) {
-    return res.render('login', { errorMessage: 'Invalid Password'});
+    return res.render('login', { errorMessage: 'Invalid Password', success: '' });
   }
 
   const token = generateToken(user.id);

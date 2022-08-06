@@ -17,6 +17,8 @@ module.exports = {
           },
           key: 'id'
         },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       recipientId: {
         type: Sequelize.INTEGER,
@@ -27,6 +29,8 @@ module.exports = {
           },
           key: 'id'
         },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       message: Sequelize.STRING,
       status: Sequelize.STRING,

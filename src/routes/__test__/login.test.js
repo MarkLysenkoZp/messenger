@@ -22,4 +22,8 @@ describe('login router', () => {
     expect(response.text.includes(errorMessage)).toEqual(true); 
     expect(response.statusCode).toBe(200);
   });
+
+  test('renders a message about successful registration', () => {
+    // TODO
+  })
 });

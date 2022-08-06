@@ -10,9 +10,9 @@ searchUsersRouter.get('/api/search_users', auth, async  (req: Request, res: Resp
   const friends = await req.currentUser.getFriends();
   const friendIds = friends.map((friend: any) => { return friend.id });
   friendIds.push(req.currentUser.id);
-  
-  const users = await User.findAll({ where: 
-    { 
+
+  const users = await User.findAll({ where:
+    {
       nickname: { [Op.iLike]: `%${term}%` },
       id: { [Op.notIn]: friendIds }
     }});

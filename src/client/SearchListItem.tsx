@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ListItemType } from './types';
+import { ISearchListItem } from './types';
 import axios from 'axios';
 
-function SearchListItem(user: ListItemType) {
+function SearchListItem(user: ISearchListItem) {
   const [friendAdded, setFriendAdded] = useState(false);
 
   const addFriend = async (event: any) => {

@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Users from './Users';
-import ChatArea from './ChatArea';
+import Chat from './Chat';
+import { UsersParams, ChatParams, IFriendListItem } from './types';
+import { emptyUser } from './constants';
 
 function App() {
+  const [isFriendShown, setIsFriendShown] = useState(false);
+  const [currentFriendInChat, setFriendInChat] = useState(emptyUser);
+
+  const usersParams: UsersParams = {
+    setIsFriendShown,
+    setFriendInChat
+  };
+
+  const chatParams: ChatParams = {
+    isFriendShown,
+    currentFriendInChat
+  }
 
   return (
     <React.StrictMode>
          <div className='wrapper'>
-            <Users />
+            <Users {...usersParams} />
         </div>
         <div className='wrapper'>
-            <ChatArea />
+            <Chat {...chatParams} />
         </div>
     </React.StrictMode>
   );

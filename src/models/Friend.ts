@@ -37,7 +37,9 @@ Friend.init(
         model: User,
         // This is the column name of the referenced model
         key: 'id',
-      }
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade'
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -46,7 +48,9 @@ Friend.init(
         model: User,
         // This is the column name of the referenced model
         key: 'id',
-      }
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade'
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,

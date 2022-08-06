@@ -1,20 +1,17 @@
 import React from 'react';
+import { ChatParams } from './types';
+import FriendInChat from './FriendInChat';
 
-function ChatArea() {
+function Chat(data: ChatParams) {
   return (
     <div className="wrapper">
         <div>
             <a href="/profile" className="right logout">Profile</a>
         </div>
         <section className="chat-area">
-            <header>
-                <a href="#" className="back-icon"><i className="fas fa-arrow-left"></i></a>
-                <img src="images/img1.jpeg" alt="" />
-                <div className="details">
-                    <span>Vasya</span>
-                    <p>Online</p>
-                  </div>
-            </header>
+
+            { data.isFriendShown ? <FriendInChat {...data.currentFriendInChat} />  : <header></header> }
+
             <div className="chat-box">
                 <div className="chat outgoing">
                     <div className="details">
@@ -28,14 +25,19 @@ function ChatArea() {
                     </div>
                 </div>
             </div>
-            <form action="#" className="typing-area">
-                <input type="text" placeholder="Type  a message" />
-                <button><i className="fab fa-telegram-plane"></i></button>
-            </form>
+            { 
+                data.isFriendShown ?
+                <form action="#" className="typing-area" data-testid="message-form">
+                    <input type="text" placeholder="Type  a message" />
+                    <button><i className="fab fa-telegram-plane"></i></button>
+                </form>
+                :
+                <div className='typing-area'></div>
+            }
         </section>
     </div>
     
   );
 }
 
-export default ChatArea;
+export default Chat;
