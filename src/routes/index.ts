@@ -1,16 +1,9 @@
-import express, { Express, Request, Response, Router } from 'express';
-const app: Express = express();
+import express, { Request, Response, Router } from 'express';
 const indexRouter: Router = express.Router();
-import { testConnection } from '../dbConnection';
 import { auth } from '../middleware/auth';
 
-indexRouter.get('/', auth, async  (req: Request, res: Response) => {
-  await testConnection();
-  const success = 'Changes saved successfully';
-  if (req.param("success")) {
-    res.render('index', { success })
-  }else{
-    res.render('index',{ success: ''});
-  }
+indexRouter.get('/', auth, async  (_: Request, res: Response) => {
+  res.render('index');
 });
+
 export default indexRouter;

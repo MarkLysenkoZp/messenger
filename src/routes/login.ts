@@ -8,9 +8,9 @@ loginRouter.get('/login', async  (req: Request, res: Response) => {
   let success = "";
   if (req.query.success) {
     success = 'You have been registered successfully. Please, login to continue';
-    res.render('login',{success, errorMessage: '' })
-    res.render('login', { errorMessage: '', success});
   }
+  
+  res.render('login', { errorMessage: '', success });
 });
 
 loginRouter.post('/login', async (req: Request, res: Response) => {
