@@ -9,14 +9,21 @@ loginRouter.get('/login', async  (req: Request, res: Response) => {
   if (req.query.success) {
     success = 'You have been registered successfully. Please, login to continue';
   }
-  
+
   res.render('login', { errorMessage: '', success });
 });
 
 loginRouter.post('/login', async (req: Request, res: Response) => {
-  const user = await User.findOne({ where: { email: req.body.email } });
-  if(user === null) {
-    return res.render('login',  { errorMessage: 'User not Found', success: '' });
+  let user: any = {};
+  try {
+    user = await User.findOne({ where: { email: req.body.email } });
+    if(user === null) {
+      return res.render('login',  { errorMessage: 'User not Found', success: '' });
+    }
+  }
+  catch (ex: any) {
+    console.log('Crashed at login');
+    return;
   }
 
   // comparing passwords

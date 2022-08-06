@@ -15,17 +15,32 @@ function Users(data: UsersParams) {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const { data } = await axios.get('/api/userinfo');
-      setCurrentUser(data);
+      try {
+        const { data } = await axios.get('/api/userinfo');
+        setCurrentUser(data);
+      }
+      catch(ex: any) {
+        console.log('Failed to fetch UserInfo');
+      }
     };
 
     const fetchFriends = async () => {
-      const { data } = await axios.get('/api/fetch_friends');
-      setFriends(data);
+      try {
+        const { data } = await axios.get('/api/fetch_friends');
+        setFriends(data);
+      }
+      catch(ex: any) {
+        console.log('Failed to fetch Friends');
+      }
     }
 
-    fetchUserInfo();
-    fetchFriends();
+    try {
+      fetchUserInfo();
+      fetchFriends();
+    }
+    catch(ex: any) {
+      console.log('Users.tsx failed to fetch UserInfo or Friends');
+    }
   }, []);
 
   const onSearch = async (event: any) => {

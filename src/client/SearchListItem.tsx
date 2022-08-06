@@ -8,7 +8,13 @@ function SearchListItem(user: ISearchListItem) {
   const addFriend = async (event: any) => {
     event.preventDefault();
     if (friendAdded) return;
-    await axios.post('/api/add_friend', { userId: user.id });
+    
+    try {
+      await axios.post('/api/add_friend', { userId: user.id });
+    }
+    catch(ex: any) {
+      console.log('Failed to POST to /api/add_friend')
+    }
     setFriendAdded(true);
   }
 
