@@ -21,5 +21,5 @@ How to create a Pull Request:
 10. Go to your console and delete the obsolete branch:
  - git branch -D new-branch
 
- How to run tests in console:
+How to run tests in console:
  npm run test
