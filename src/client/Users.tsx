@@ -3,13 +3,14 @@ import UserInfo from './UserInfo';
 import UserSearch from './UserSearch';
 import FriendListItem from './FriendListItem';
 import SearchListItem from './SearchListItem';
-import { IFriendListItem, ISearchListItem, UsersParams } from './types';
-import { emptyUser, TERM_MIN_LENGHT } from './constants';
+import { IFriendListItem, ISearchListItem, IUsersParams } from './types';
+import { emptyFriend, TERM_MIN_LENGHT } from './constants';
+import CurrentUser from './CurrentUser';
 
 import axios from 'axios';
 
-function Users(data: UsersParams) {
-  const [currentUser, setCurrentUser] = useState(emptyUser);
+function Users(data: IUsersParams) {
+  const [currentUser, setCurrentUser] = useState(emptyFriend);
   const [friends, setFriends] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -18,6 +19,7 @@ function Users(data: UsersParams) {
       try {
         const { data } = await axios.get('/api/userinfo');
         setCurrentUser(data);
+        CurrentUser.set(data);
       }
       catch(ex: any) {
         console.log('Failed to fetch UserInfo');
@@ -74,14 +76,14 @@ function Users(data: UsersParams) {
         {friends.map((friend: IFriendListItem) => {
           friend.setIsFriendShown = data.setIsFriendShown;
           friend.setFriendInChat = data.setFriendInChat;
-          return <FriendListItem {...friend} />
+          return <FriendListItem key={friend.id} {...friend} />
         })}
       </section>
 
       {/* Search List */}
       <section className="users">
         {users.map((user: ISearchListItem) => {
-          return <SearchListItem {...user} />
+          return <SearchListItem key={user.id} {...user} />
         })}
       </section>
     </section>
