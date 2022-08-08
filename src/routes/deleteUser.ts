@@ -5,7 +5,7 @@ import { auth } from '../middleware/auth';
 deleteUserRouter.post('/deleteCurrentUser', auth, async  (req: Request, res: Response) => {
   try {
     await req.currentUser.destroy();
-    res.redirect('/signup');
+    res.redirect('/signup?success=ok');
   }
   catch (ex: any) {
     console.log('Failed to Destroy current User');

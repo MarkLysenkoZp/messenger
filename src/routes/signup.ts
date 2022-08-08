@@ -3,8 +3,13 @@ const signupRouter: Router = express.Router();
 import User from '../models/User';
 import { hashPassword } from '../utils/authUtils';
 
-signupRouter.get('/signup', async  (_: Request, res: Response) => {
-  res.render('signup', { errorMessage: '' });
+signupRouter.get('/signup', async  (req: Request, res: Response) => {
+  let success = "";
+  if (req.query.success) {
+    success = 'Account was deleted';
+  }
+
+  res.render('signup', { errorMessage: '', success });
 });
 
 signupRouter.post('/signup', async  (req: Request, res: Response) => {
@@ -17,11 +22,12 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
     });
 
     await user.validate();
-    user.password = hashPassword(req.body.password);
+    user.password = hashPassword(req.body.password);  
     await user.save();
     res.redirect('/login?success=ok');
   } catch(e:any) {
     res.render('signup', { errorMessage: e.message });
   }
 });
+
 export default signupRouter;

@@ -27,4 +27,12 @@ describe('Signup router', () => {
     
     expect(response.statusCode).toBe(200);
   });
+
+  test('It should render success message', async () => {
+    const success = 'Account was deleted';
+    const response = await request(server).get("/signup?success=ok");
+    expect(response.text.includes(success)).toEqual(true);
+ 
+    expect(response.statusCode).toBe(200);
+  });
 });
