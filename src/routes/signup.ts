@@ -8,7 +8,7 @@ signupRouter.get('/signup', async  (req: Request, res: Response) => {
   if (req.query.success) {
     success = 'Account was deleted';
   }
-
+  
   res.render('signup', { errorMessage: '', success });
 });
 
@@ -20,13 +20,13 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
       avatar: req.body.avatar,
       password: req.body.password
     });
-
+    
     await user.validate();
-    user.password = hashPassword(req.body.password);  
+     user.password = hashPassword(req.body.password);  
     await user.save();
     res.redirect('/login?success=ok');
-  } catch(e:any) {
-    res.render('signup', { errorMessage: e.message });
+  } catch(e:any){
+     res.render('signup', { errorMessage: e.message });
   }
 });
 
