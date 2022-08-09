@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const request = require("supertest");
-const server = require("../../../dist/server").default;
+// const server = require("../../../dist/server").default;
 
 afterAll((done) => {
   server.close(done);
 });
 
-describe('Signup router', () => {
+xdescribe('Signup router', () => {
   test('It should respond to GET method', async () => {
     const response = await request(server).get("/signup");
     expect(response.statusCode).toBe(200);

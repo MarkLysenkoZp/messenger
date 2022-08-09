@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const request = require("supertest");
-const server = require("../../../dist/server").default;
+// const server = require("../../../dist/server").default;
 
 afterAll((done) => {
   server.close(done);
 });
 
-describe('index router', () => {
+xdescribe('index router', () => {
   // eslint-disable-next-line no-undef
   test('It should respond to GET method', async () => {
     const response = await request(server).get("/");
