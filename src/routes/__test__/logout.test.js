@@ -2,8 +2,8 @@
 import request from "supertest";
 import server from "../../../dist/server";
 
-afterEach(() => {
-  server.close()
+afterAll((done) => {
+  server.close(done);
 });
 
 describe('logout router', () => {

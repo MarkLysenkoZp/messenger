@@ -3,8 +3,8 @@
 const request = require("supertest");
 const server = require("../../../dist/server").default;
 
-afterEach(() => {
-  server.close()
+afterAll((done) => {
+  server.close(done);
 });
 
 describe('index router', () => {
