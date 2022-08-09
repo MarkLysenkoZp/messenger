@@ -1,18 +1,18 @@
 import React from 'react';
 import { IFriendListItem } from './types';
 
-function FriendListItem(data: IFriendListItem) {
+function FriendListItem(friend: IFriendListItem) {
   const onClick = () => {
-    data.setIsFriendShown(true);
-    data.setFriendInChat(data);
+    friend.setIsFriendShown(true);
+    friend.setFriendInChat(friend);
   }
 
   return (
     <header>
         <div className="content">
-            { data.avatar ? <img src={data.avatar} alt="avatar" /> : '' }
+            { friend.avatar ? <img src={friend.avatar} alt="avatar" /> : '' }
             <div className="details">
-                <span>{data.nickname}</span>
+                <span>{friend.nickname}</span>
                 <p>This is test message</p>
             </div>
         </div>

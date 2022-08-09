@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import Users from './Users';
 import Chat from './Chat';
-import { UsersParams, ChatParams, IFriendListItem } from './types';
-import { emptyUser } from './constants';
+import { IUsersParams, IChatParams, IFriendListItem } from './types';
+import { emptyFriend } from './constants';
 
 function App() {
   const [isFriendShown, setIsFriendShown] = useState(false);
-  const [currentFriendInChat, setFriendInChat] = useState(emptyUser);
+  const [friendInChat, setFriendInChat] = useState(emptyFriend);
 
-  const usersParams: UsersParams = {
+  const usersParams: IUsersParams = {
     setIsFriendShown,
     setFriendInChat
   };
 
-  const chatParams: ChatParams = {
+  const chatParams: IChatParams = {
     isFriendShown,
-    currentFriendInChat
+    friendInChat
   }
 
   return (
