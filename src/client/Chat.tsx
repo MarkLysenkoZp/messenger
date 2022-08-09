@@ -14,6 +14,7 @@ function Chat(data: IChatParams) {
   useEffect(() => {
     const fetchMessages = async () => {
       if(! data.isFriendShown) return;
+      
       try {
         const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: data.friendInChat.id } });
         const _messages: IMessage[] = result.data.map((m: any) => {
@@ -35,7 +36,7 @@ function Chat(data: IChatParams) {
     };
     
     fetchMessages();
-  }, [data])
+  }, [data]); // Pass data as arg to make sure the fetch is Done only when a Friend is selected
 
   const sendMessage = async () => {
     if(currentMessage.length === 0) return;
