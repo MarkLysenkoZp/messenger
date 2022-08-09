@@ -19,7 +19,7 @@
     "start:client": "nodemon --watch src -e ts,ejs,tsx,js --exec npm-run-all build:client start",
     "start:client:server": "nodemon --watch src -e ts,ejs,tsx,js --exec npm-run-all build:client build:server start",
     "start:server": "nodemon --watch src -e ts,ejs,tsx,js --exec npm-run-all build:server start",
-    "test": "jest --forceExit"
+    "test": "jest"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
