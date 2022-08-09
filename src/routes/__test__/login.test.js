@@ -26,7 +26,6 @@ describe('login router', () => {
   test('renders a message about successful registration', async () => {
     const success = 'You have been registered successfully. Please, login to continue';
     const response = await request(server).get("/login?success=ok");
-    console.log('Text',response.text);
     expect(response.text.includes(success)).toEqual(true);
     expect(response.statusCode).toBe(200);
   })
