@@ -1,14 +1,18 @@
-/* eslint-disable no-undef */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const request = require("supertest");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const server = require("../../../dist/server").default;
+import request from "supertest";
+import app from '../../../dist/app';
+import http from 'http';
+let server;
+
+beforeAll((done) => {
+  server = http.createServer(app);
+  server.listen(done);
+});
 
 afterAll((done) => {
   server.close(done);
 });
 
-xdescribe('login router', () => {
+describe('login router', () => {
   test('It should respond to GET method', async () => {
     const response = await request(server).get("/login");
     expect(response.statusCode).toBe(200);
