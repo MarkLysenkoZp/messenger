@@ -14,19 +14,24 @@ function Chat(data: IChatParams) {
   useEffect(() => {
     const fetchMessages = async () => {
       if(! data.isFriendShown) return;
-      const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: data.friendInChat.id } });
-      const _messages: IMessage[] = result.data.map((m: any) => {
-        return {
-          id: m.id,
-          userId: m.userId,
-          recipeintId: m.recipientId,
-          message: m.message,
-          isTo: m.recipientId == CurrentUser.get().id,
-          isFrom: m.userId == CurrentUser.get().id,
-          fromAvatar: m.recipientId == CurrentUser.get().id ? data.friendInChat.avatar : ''
-        };
-      });
-      setMessages(_messages);
+      try {
+        const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: data.friendInChat.id } });
+        const _messages: IMessage[] = result.data.map((m: any) => {
+          return {
+            id: m.id,
+            userId: m.userId,
+            recipeintId: m.recipientId,
+            message: m.message,
+            isTo: m.recipientId == CurrentUser.get().id,
+            isFrom: m.userId == CurrentUser.get().id,
+            fromAvatar: m.recipientId == CurrentUser.get().id ? data.friendInChat.avatar : ''
+          };
+        });
+        setMessages(_messages);
+      }
+      catch(ex: any) {
+        console.log('Failed to fetch Messages', ex);
+      }
     };
     
     fetchMessages();
