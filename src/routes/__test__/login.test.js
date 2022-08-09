@@ -17,7 +17,6 @@ describe('login router', () => {
   xtest('It responds to POST method with empty fields', async () => {
     const response = await request(server).post("/login")
       .send({email: 'john@mail.com' });
-      
     const errorMessage = 'User not Found';
     expect(response.text.includes(errorMessage)).toEqual(true); 
     expect(response.statusCode).toBe(200);
