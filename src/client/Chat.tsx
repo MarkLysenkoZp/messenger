@@ -31,7 +31,7 @@ function Chat(data: IChatParams) {
         setMessages(_messages);
       }
       catch(ex: any) {
-        console.log('Failed to fetch Messages', ex);
+        // console.log('Failed to fetch Messages', ex);
       }
     };
     

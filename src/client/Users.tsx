@@ -22,7 +22,7 @@ function Users(data: IUsersParams) {
         CurrentUser.set(data);
       }
       catch(ex: any) {
-        console.log('Failed to fetch UserInfo');
+        // console.log('Failed to fetch UserInfo');
       }
     };
 
@@ -32,7 +32,7 @@ function Users(data: IUsersParams) {
         setFriends(data);
       }
       catch(ex: any) {
-        console.log('Failed to fetch Friends');
+        // console.log('Failed to fetch Friends');
       }
     }
 
@@ -41,7 +41,7 @@ function Users(data: IUsersParams) {
       fetchFriends();
     }
     catch(ex: any) {
-      console.log('Users.tsx failed to fetch UserInfo or Friends');
+      // console.log('Users.tsx failed to fetch UserInfo or Friends');
     }
   }, []);
 

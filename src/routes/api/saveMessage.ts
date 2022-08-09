@@ -11,7 +11,7 @@ saveMessageRouter.post('/api/save_message', auth, async  (req: Request, res: Res
       message: req.body.message,
       status: 'sent'
     });
-    
+
     res.json(result);
   }
   catch(ex: any) {
