@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible " content="ie=edge">
     <title>Realtime Chat App | CodingNepal</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <body>
@@ -13,26 +13,16 @@
 <section class="form signup">
     <header>Realtime Chat App</header>
     <form action="/login" method="post">
-         <div class="error-txt"><%= errorMessage %></div>
-         <div class="success-txt"><%= success %></div>
             <div class="field input">
                 <label>Email Adderss</label>
                 <input name="email" type="text" placeholder="Enter your email">
-            </div>
-    
-            <div class="field input">
-                <label>Password</label>
-                <input name="password" type="password" placeholder="Enter your password">
-                <i class="fas fa-eye"></i>
-            </div>
+            </div>  
          <div class="field button">
-         <input type="submit" value="Continue to Chat">
+         <input type="submit" value="Continue">
+         <input type="submit" value="Back">
         </div>
     </form>
-    <div class="link">Not yet signed up? <a href="/signup">Sign Up!</a>
-        <div class="link">Forgot your password <a href="/recovery">Click Here!</a>
 </section>
 </div>
-<script src="/javacript/pass-show-hide.js"></script>
 </body>
 </html>
