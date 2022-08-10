@@ -41,5 +41,4 @@ function Chat(data: ChatParams) {
     
   );
 }
-
 export default Chat;
