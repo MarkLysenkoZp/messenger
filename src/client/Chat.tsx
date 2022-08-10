@@ -25,15 +25,16 @@ function Chat(data: ChatParams) {
                     </div>
                 </div>
             </div>
-            { 
-                data.isFriendShown ?
-                <form action="#" className="typing-area" data-testid="message-form">
-                    <input type="text" placeholder="Type  a message" />
-                    <button><i className="fab fa-telegram-plane"></i></button>
-                </form>
-                :
+            
+                
+                <form action="#" className='typing-area'>
+                <input type="text" placeholder="Type  a message" />
+                <button><i className='fab fa-telegram-plane'></i></button>
+                <button><i className='fa fa-phone'></i></button>
+                <button><i className='fas fa-video'></i></button>
+                 </form>
                 <div className='typing-area'></div>
-            }
+            
         </section>
     </div>
     
