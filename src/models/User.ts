@@ -24,6 +24,17 @@ class User extends Model {
   declare confirmedAt: CreationOptional<Date>;
   // This is a stub for typescript checker
   getFriends: any;
+  async messagesTo(friendId: number) {
+    return await Message.findAll({
+      where: { userId: this.id, recipientId: friendId }
+    });
+  }
+
+  async messagesFrom(friendId: number) {
+    return await Message.findAll({
+      where: { userId: friendId, recipientId: this.id }
+    });
+  }
 }
 
 User.init(
@@ -84,8 +95,8 @@ User.init(
 );
 
 User.belongsToMany(User, { through: Friend, as: "Friends", foreignKey: "userId", otherKey: 'friendId' });
-User.hasMany(Message, { foreignKey: 'userId' });
 
-Message.belongsTo(User, { foreignKey: 'userId' });
+Message.belongsTo(User, { as: 'Sender', foreignKey: 'userId' });
+Message.belongsTo(User, { as: 'Recipient', foreignKey: 'recipientId' });
 
 export default User;

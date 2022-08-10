@@ -1,11 +1,15 @@
-/* eslint-disable no-undef */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const request = require("supertest");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const server = require("../../../dist/server").default;
+import request from "supertest";
+import app from '../../../dist/app';
+import http from 'http';
+let server;
 
-afterEach(() => {
-  server.close()
+beforeAll((done) => {
+  server = http.createServer(app);
+  server.listen(done);
+});
+
+afterAll((done) => {
+  server.close(done);
 });
 
 describe('login router', () => {
@@ -25,7 +29,7 @@ describe('login router', () => {
   test('renders a message about successful registration', async () => {
     const success = 'You have been registered successfully. Please, login to continue';
     const response = await request(server).get("/login?success=ok");
-    console.log('Text',response.text);
+
     expect(response.text.includes(success)).toEqual(true);
     expect(response.statusCode).toBe(200);
   })
