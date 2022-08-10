@@ -80,6 +80,8 @@ function Chat(data: IChatParams) {
                     <button onClick={(e) => { e.preventDefault(); sendMessage(); }}>
                         <i className="fab fa-telegram-plane"></i>
                     </button>
+                    <button><i className='fa fa-phone'></i></button>
+                    <button><i className='fas fa-video'></i></button>
                 </form>
                 :
                 <div className='typing-area'></div>

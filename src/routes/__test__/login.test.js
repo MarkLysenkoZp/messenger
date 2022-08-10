@@ -21,7 +21,6 @@ describe('login router', () => {
   xtest('It responds to POST method with empty fields', async () => {
     const response = await request(server).post("/login")
       .send({email: 'john@mail.com' });
-      
     const errorMessage = 'User not Found';
     expect(response.text.includes(errorMessage)).toEqual(true); 
     expect(response.statusCode).toBe(200);
@@ -30,6 +29,7 @@ describe('login router', () => {
   test('renders a message about successful registration', async () => {
     const success = 'You have been registered successfully. Please, login to continue';
     const response = await request(server).get("/login?success=ok");
+
     expect(response.text.includes(success)).toEqual(true);
     expect(response.statusCode).toBe(200);
   })
