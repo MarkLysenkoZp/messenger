@@ -9,14 +9,14 @@ To start application:
 4. http://localhost:3000
 
 How to create a Pull Request:
-0. Swithc back to main branch
-1. Pull from main: git pull origin main
+0. Switch back to main branch: git checkout main
+1. Pull from main branch: git pull origin main
 2. Create a new branch: git checkout -b new-branch
 3. git add .
 4. git commit -m "Here goes your comment"
-5. git rebase -i main
-6. In vim: "shift + :"
-7. wq + enter
+5. (Optional) git rebase -i main
+6. (Optional) In vim: "shift + :"
+7. (Optional) wq + enter
 8. git push origin new-branch
 9. Now go to github and create a Pull Request
 10. Merge PR to main branch
