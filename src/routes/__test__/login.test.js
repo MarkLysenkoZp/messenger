@@ -23,7 +23,10 @@ xdescribe('login router', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  test('renders a message about successful registration', () => {
-    // TODO
+  test('renders a message about successful registration', async () => {
+    const success = 'You have been registered successfully. Please, login to continue';
+    const response = await request(server).get("/login?success=ok");
+    expect(response.text.includes(success)).toEqual(true);
+    expect(response.statusCode).toBe(200);
   })
 });
