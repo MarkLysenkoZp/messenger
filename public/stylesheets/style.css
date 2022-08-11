@@ -303,6 +303,7 @@ a.right {
     width: 35px;
   }
 
+
 .outgoing .details{
   margin-left: auto;
   max-width: calc(100% - 130px);
@@ -368,5 +369,10 @@ a.right {
 
   .success-txt {
     color: green;
+  }
+
+  .profile-avatar { 
+    height: 50px;
+    width: 50px;
   }
    
