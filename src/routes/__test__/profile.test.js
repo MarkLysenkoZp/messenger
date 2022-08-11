@@ -1,8 +1,15 @@
-const request = require("supertest");
-const server = require("../../../dist/server").default;
+import request from "supertest";
+import app from '../../../dist/app';
+import http from 'http';
+let server;
 
-afterEach(() => {
-  server.close()
+beforeAll((done) => {
+  server = http.createServer(app);
+  server.listen(done);
+});
+
+afterAll((done) => {
+  server.close(done);
 });
 
 describe('Profile router', () => {

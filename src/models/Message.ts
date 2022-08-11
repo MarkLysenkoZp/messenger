@@ -1,7 +1,6 @@
 import {
   Model,
   DataTypes,
-  Deferrable,
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
@@ -54,7 +53,7 @@ Message.init(
       onUpdate: 'cascade',
       onDelete: 'cascade'
     },
-    message: DataTypes.TEXT,
+    message: { type: DataTypes.TEXT, validate: { notEmpty: true }},
     status: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,

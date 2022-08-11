@@ -1,17 +1,20 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-const request = require("supertest");
-const server = require("../../../dist/server").default;
+import request from "supertest";
+import app from '../../../dist/app';
+import http from 'http';
+let server;
 
-afterEach(() => {
-  server.close()
+beforeAll((done) => {
+  server = http.createServer(app);
+  server.listen(done);
+});
+
+afterAll((done) => {
+  server.close(done);
 });
 
 describe('index router', () => {
-  // eslint-disable-next-line no-undef
   test('It should respond to GET method', async () => {
     const response = await request(server).get("/");
-    // eslint-disable-next-line no-undef
     expect(response.statusCode).toBe(302);
   });
 });

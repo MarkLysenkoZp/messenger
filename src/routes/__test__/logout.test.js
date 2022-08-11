@@ -1,9 +1,15 @@
-/* eslint-disable no-undef */
 import request from "supertest";
-import server from "../../../dist/server";
+import app from '../../../dist/app';
+import http from 'http';
+let server;
 
-afterEach(() => {
-  server.close()
+beforeAll((done) => {
+  server = http.createServer(app);
+  server.listen(done);
+});
+
+afterAll((done) => {
+  server.close(done);
 });
 
 describe('logout router', () => {

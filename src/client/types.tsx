@@ -11,12 +11,22 @@ export interface IFriendListItem extends IUserListItem {
 
 export interface ISearchListItem extends IUserListItem {}
 
-export interface UsersParams {
+export interface IUsersParams {
   setIsFriendShown: Function;
   setFriendInChat: Function;
 };
 
-export interface ChatParams {
+export interface IChatParams {
   isFriendShown: boolean;
-  currentFriendInChat: IFriendListItem;
+  friendInChat: IFriendListItem;
 };
+
+export interface IMessage {
+  id: number;
+  userId: number;
+  recipeintId: number;
+  message: string;
+  isTo: boolean;
+  isFrom: boolean;
+  fromAvatar: string;
+}
