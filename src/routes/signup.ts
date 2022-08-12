@@ -22,7 +22,7 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
     });
 
     await user.validate();
-    user.password = hashPassword(req.body.password); 
+    user.password = hashPassword(req.body.password);
     await user.save();
     res.redirect('/login?success=ok');
   } catch(e:any) {
