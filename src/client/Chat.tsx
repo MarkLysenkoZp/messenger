@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { IChatParams, IMessage } from './types';
 import FriendInChat from './FriendInChat';
 import Message from './Message';
@@ -10,7 +9,6 @@ function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
   const [currentMessage, setCurrentMessage] = useState('');
-  
   useEffect(() => {
     const fetchMessages = async () => {
       if(! data.isFriendShown) return;
@@ -40,7 +38,7 @@ function Chat(data: IChatParams) {
 
   const sendMessage = async () => {
     if(currentMessage.length === 0) return;
-
+    // TODO: add try-catch block
     const result: any = await axios.post('/api/save_message', {
       recipientId: data.friendInChat.id,
       message: currentMessage
