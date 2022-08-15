@@ -3,11 +3,9 @@ import Users from './Users';
 import Chat from './Chat';
 import { IUsersParams, IChatParams, IFriendListItem } from './types';
 import { emptyFriend } from './constants';
- 
 function App() {
   const [isFriendShown, setIsFriendShown] = useState(false);
   const [friendInChat, setFriendInChat] = useState(emptyFriend);
-
   const usersParams: IUsersParams = {
     setIsFriendShown,
     setFriendInChat

@@ -9,7 +9,6 @@ function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
   const [currentMessage, setCurrentMessage] = useState('');
-   
   useEffect(() => {
     const fetchMessages = async () => {
       if(! data.isFriendShown) return;
