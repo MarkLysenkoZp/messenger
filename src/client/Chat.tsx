@@ -39,7 +39,7 @@ function Chat(data: IChatParams) {
 
   const sendMessage = async () => {
     if(currentMessage.length === 0) return;
- // TODO: add try-catch block
+    // TODO: add try-catch block
     const result: any = await axios.post('/api/save_message', {
       recipientId: data.friendInChat.id,
       message: currentMessage
