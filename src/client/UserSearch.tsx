@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// TODO: add try-catch block
 
 function UserSearch(props: any) {
   const [searchButtonActive, toggleSearchButtonState] = useState(false);

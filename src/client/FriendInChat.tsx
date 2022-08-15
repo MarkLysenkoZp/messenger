@@ -1,6 +1,5 @@
 import React from 'react';
 import { IFriendListItem } from './types';
-// TODO: add try-catch block
 function FriendInChat(data: IFriendListItem){
   return (
     <header>
