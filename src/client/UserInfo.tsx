@@ -1,5 +1,6 @@
 import React from 'react';
 import { IUserListItem } from './types';
+// TODO: add try-catch block
 
 function UserInfo(user: IUserListItem) {
   return (

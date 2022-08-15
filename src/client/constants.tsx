@@ -1,5 +1,5 @@
 import { IFriendListItem, IMessage} from './types';
-
+// TODO: add try-catch block
 export const emptyFriend: IFriendListItem = {
   id: 0,
   nickname: '',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { IMessage } from './types';
+// TODO: add try-catch block
 
 function Message(data: IMessage) {
   const css = data.isTo ? 'chat incoming' : 'chat outgoing';

@@ -1,5 +1,5 @@
 import { IUserListItem } from './types';
-
+// TODO: add try-catch block
 class CurrentUser {
   static set(user: IUserListItem){
     sessionStorage.setItem('currentUserId', user.id.toString());

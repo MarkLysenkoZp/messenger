@@ -3,6 +3,7 @@ export interface IUserListItem {
   nickname: string;
   avatar: string;
 };
+// TODO: add try-catch block
 
 export interface IFriendListItem extends IUserListItem {
   setIsFriendShown: Function;
