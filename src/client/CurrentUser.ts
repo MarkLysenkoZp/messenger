@@ -9,10 +9,10 @@ class CurrentUser {
 
   static get()  {
     return {
-      id: sessionStorage.getItem('currentUserId'),
-      nickname: sessionStorage.getItem('currentUserNickname'),
-      avatar: sessionStorage.getItem('currentUserAvatar')
-    }
+      id: Number(sessionStorage.getItem('currentUserId')),
+      nickname: String(sessionStorage.getItem('currentUserNickname')),
+      avatar: String(sessionStorage.getItem('currentUserAvatar'))
+    };
   }
 }
 

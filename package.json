@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:assets": "ts-node src/tools/buildAssets",
-    "build:client": "webpack",
+    "build:client": "webpack --progress",
     "build:server": "tsc",
     "build:views": "ts-node src/tools/buildViews",
     "build:all": "npm-run-all clean build:assets build:views build:client lint build:server",
@@ -14,6 +14,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:down": "npx sequelize-cli db:migrate:undo",
+    "postinstall": "cp node_modules/webrtc-adapter/out/adapter.js ./public/javascript/adapter.js",
     "start": "node dist/server.js",
     "start:all": "npm run dev",
     "start:client": "nodemon --watch src -e ts,ejs,tsx,js --exec npm-run-all build:client start",
@@ -43,7 +44,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sequelize": "^6.21.3",
-    "ts-dotenv": "^0.8.3"
+    "ts-dotenv": "^0.8.3",
+    "webrtc-adapter": "^1.4.0",
+    "websocket": "^1.0.34"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.127.0",
