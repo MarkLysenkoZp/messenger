@@ -8,7 +8,6 @@ import ChatClient from './ChatClient';
 function App() {
   const [isFriendShown, setIsFriendShown] = useState(false);
   const [friendInChat, setFriendInChat] = useState(emptyFriend);
-
   const usersParams: IUsersParams = {
     setIsFriendShown,
     setFriendInChat

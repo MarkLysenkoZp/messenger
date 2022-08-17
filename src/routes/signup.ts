@@ -22,6 +22,7 @@ signupRouter.post('/signup', async  (req: Request, res: Response) => {
     });
 
     await user.validate();
+
     // reset the password here with an encrypted version
     user.password = hashPassword(req.body.password);
     await user.save();

@@ -303,6 +303,7 @@ a.right {
     width: 35px;
   }
 
+
 .outgoing .details{
   margin-left: auto;
   max-width: calc(100% - 130px);
@@ -365,6 +366,7 @@ a.right {
   color: red;
 }
 
+
 .success-txt {
   color: green;
 }
@@ -424,4 +426,13 @@ a.right {
   filter: grayscale(50%);
   -webkit-filter: grayscale(50%);
   cursor: default;
+}
+
+.success-txt {
+  color: green;
+}
+
+.profile-avatar { 
+  height: 50px;
+  width: 50px;
 }

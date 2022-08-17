@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { IChatParams, IMessage } from './types';
 import FriendInChat from './FriendInChat';
 import Message from './Message';
@@ -12,7 +11,6 @@ function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
   const [currentMessage, setCurrentMessage] = useState('');
-  
   useEffect(() => {
     const renderMessages = async () => {
       if(! data.isFriendShown) return;
@@ -34,6 +32,7 @@ function Chat(data: IChatParams) {
     data.chatClient.handleSendButton(currentMessage);
 
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
+
     const list = [...messages, message];
     setMessages(list);
     setCurrentMessage('');
@@ -120,6 +119,7 @@ function Chat(data: IChatParams) {
                 return <Message key={message.id} {...message} />
             })}
         </div>
+
         { 
           data.isFriendShown ?
           <form action="#" className="typing-area" data-testid="message-form">
@@ -143,6 +143,7 @@ function Chat(data: IChatParams) {
           <div className='typing-area'></div>
         }
       </section>
+
     </div>
   );
 }

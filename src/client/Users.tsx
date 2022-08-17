@@ -53,6 +53,7 @@ function Users(data: IUsersParams) {
     // reset Search list
     if(term.length === 0) {
       setUsers([]);
+      // TODO: add try-catch block
       const { data } = await axios.get('/api/fetch_friends');
       setFriends(data);
       return;
@@ -63,6 +64,7 @@ function Users(data: IUsersParams) {
     // when User performs a search:
     // 1. Fetch matching users
     // 2. Clean the list of Friends for now
+    // 3. TODO: add try-catch block
     const { data } = await axios.get('/api/search_users', { params: { term: term } });
     setFriends([]);
     setUsers(data);

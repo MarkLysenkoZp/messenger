@@ -1,6 +1,5 @@
 import React from 'react';
 import { IFriendListItem } from './types';
-
 function FriendListItem(friend: IFriendListItem) {
   const onClick = () => {
     friend.setIsFriendShown(true);
