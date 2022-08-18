@@ -309,69 +309,130 @@ a.right {
   max-width: calc(100% - 130px);
 }
 
-  .chat-box .incoming .details{
-    margin-right: auto;
-    margin-left: 10px;
-    max-width: calc(100% - 130px);
-  }
-  .incoming .details p{
-    background: #fff;
-    color: #333;
+.chat-box .incoming .details{
+  margin-right: auto;
+  margin-left: 10px;
+  max-width: calc(100% - 130px);
+}
+.incoming .details p{
+  background: #fff;
+  color: #333;
 
-  }
+}
 
-  .outgoing .details p{
-    background: rgb(8, 0, 0)(66, 60, 60);
-    color: #333;
-    border-radius: 18px 18px 18px 0;
-  }
+.outgoing .details p{
+  background: rgb(8, 0, 0)(66, 60, 60);
+  color: #333;
+  border-radius: 18px 18px 18px 0;
+}
 
-  .incoming .details p{
-    background: rgb(8, 0, 0)(66, 60, 60);
-    color: #333;
-    border-radius: 18px 18px 18px 0;
-  }
-  .typing-area{
-    padding: 18px 30px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .typing-area input{
-    height: 45px;
-    width: calc(100% - 58px);
-    font-size: 16px;
-    padding: 0 13px;
-    border: 1px solid #e6e6e6;
-    outline: none;
-    border-radius: 5px 0 0 5px;
-  }
-  .typing-area button{
-    color: #fff;
-    width: 55px;
-    border: none;
-    outline: none;
-    background: #333;
-    font-size: 19px;
-    cursor: pointer;
-    opacity: 0.7;
-    border-radius: 0 5px 5px 0;
-    transition: all 0.3s ease;
-  }
-  .typing-area button.active{
-    opacity: 1;
-    pointer-events: auto;
-  }
+.incoming .details p{
+  background: rgb(8, 0, 0)(66, 60, 60);
+  color: #333;
+  border-radius: 18px 18px 18px 0;
+}
+.typing-area{
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.typing-area input{
+  height: 45px;
+  width: calc(100% - 58px);
+  font-size: 16px;
+  padding: 0 13px;
+  border: 1px solid #e6e6e6;
+  outline: none;
+  border-radius: 5px 0 0 5px;
+}
+.typing-area button{
+  color: #fff;
+  width: 55px;
+  border: none;
+  outline: none;
+  background: #333;
+  font-size: 19px;
+  cursor: pointer;
+  opacity: 0.7;
+  border-radius: 0 5px 5px 0;
+  transition: all 0.3s ease;
+}
+.typing-area button.active{
+  opacity: 1;
+  pointer-events: auto;
+}
 
-  .error-txt {
-    color: red;
-  }
+.error-txt {
+  color: red;
+}
 
-  .success-txt {
-    color: green;
-  }
 
-  .profile-avatar { 
-    height: 50px;
-    width: 50px;
-  }
-   
+.success-txt {
+  color: green;
+}
+
+.camerabox {
+  grid-area: camerabox;
+  width: 500px;
+  height: 375px;
+  border: 1px solid black;
+  vertical-align: top;
+  display: block;
+  position:relative;
+  overflow:auto;
+}
+
+#remote-video {
+  width: 100%;
+  height: 100%;
+  position:absolute;
+}
+
+/* The small "preview" view of your camera */
+#local-video {
+  width: 120px;
+  height: 90px;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 4px black;
+}
+
+/* The "Hang up" button */
+#hangup-button {
+  display:block;
+  width:80px;
+  height:24px;
+  border-radius: 8px;
+  position:relative;
+  margin:auto;
+  top:calc(100% - 40px);
+  background-color: rgba(150, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1.0);
+  cursor: pointer;
+}
+
+#hangup-button:hover {
+  filter: brightness(150%);
+  -webkit-filter: brightness(150%);
+}
+
+#hangup-button:disabled {
+  filter: grayscale(50%);
+  -webkit-filter: grayscale(50%);
+  cursor: default;
+}
+
+.success-txt {
+  color: green;
+}
+
+.profile-avatar { 
+  height: 50px;
+  width: 50px;
+}

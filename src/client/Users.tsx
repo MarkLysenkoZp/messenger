@@ -18,7 +18,9 @@ function Users(data: IUsersParams) {
     const fetchUserInfo = async () => {
       try {
         const { data } = await axios.get('/api/userinfo');
+        // set current user for component
         setCurrentUser(data);
+        // set current user in sessionStorage for future reference
         CurrentUser.set(data);
       }
       catch(ex: any) {

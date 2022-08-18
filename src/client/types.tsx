@@ -19,6 +19,7 @@ export interface IUsersParams {
 export interface IChatParams {
   isFriendShown: boolean;
   friendInChat: IFriendListItem;
+  chatClient: any;
 };
 
 export interface IMessage {

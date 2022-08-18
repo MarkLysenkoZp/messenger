@@ -11,7 +11,10 @@ describe('Chat', () => {
   test('Renders without errors', () => {
     const chatParams = {
       isFriendShown: true,
-      friendInChat: {}
+      friendInChat: {},
+      chatClient: {
+        connection: {}
+      }
     };
 
     expect(() => {
@@ -24,7 +27,10 @@ describe('Chat', () => {
     const testId = 'message-form';
     const chatParams = {
       isFriendShown: true,
-      friendInChat: { id: 1, nickname, avatar: 'src/img' }
+      friendInChat: { id: 1, nickname, avatar: 'src/img' },
+      chatClient: {
+        connection: {}
+      }
     };
     
     const { getByText, getByTestId } = render(<Chat {...chatParams} />);
