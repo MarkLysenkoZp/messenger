@@ -22,13 +22,3 @@ export let env: Env;
 export function loadEnv(): void {
   env = load(schema);
 }
-
-export const dbOptions = () => {
-  if(process.env.NODE_ENV === 'production') {
-    return {
-      ssl: { require: true, rejectUnauthorized: false }
-    }
-  }
-
-  return {};
-}
