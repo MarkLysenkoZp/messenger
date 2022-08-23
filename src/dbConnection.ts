@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import Debug from 'debug';
 const debug = Debug('Messenger');
 import 'dotenv/config';
-import { loadEnv, env } from './env';
+import { loadEnv, env, dbOptions } from './env';
 
 loadEnv(); // Executed synchronously before the rest of your app loads
 
@@ -13,6 +13,7 @@ export const sequelize = new Sequelize(
   {
     host: env.DB_HOST,
     dialect: 'postgres',
+    dialectOptions: dbOptions()
   }
 );
 
