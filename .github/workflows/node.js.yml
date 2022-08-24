@@ -10,11 +10,7 @@ on:
     branches: [ "*" ]
     
 env:
-  DB_HOST: "localhost"
-  DB_NAME: "messenger_test"
-  DB_USER: "postgres"
-  DB_PASSWORD: ""
-  DB_DIALECT: "postgres"
+  DATABASE_URL: "postgres://postgres@localhost:5432/messenger_development"
   JWT_PRIVATE_KEY: "JWT_PRIVATE_KEY"
   AWS_ACCESS_KEY: "AWS_ACCESS_KEY"
   AWS_SECRET_KEY: "AWS_SECRET_KEY"
