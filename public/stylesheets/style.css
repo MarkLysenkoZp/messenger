@@ -307,6 +307,7 @@ a.right {
 .outgoing .details{
   margin-left: auto;
   max-width: calc(100% - 130px);
+  position: relative;
 }
 
 .chat-box .incoming .details{
@@ -324,6 +325,18 @@ a.right {
   background: rgb(8, 0, 0)(66, 60, 60);
   color: #333;
   border-radius: 18px 18px 18px 0;
+}
+
+.outgoing .details .edit-message{
+  display: none;
+  position: absolute;
+  top: 12px;
+  left: -20px;
+  color: #777;
+}
+
+.outgoing:hover .details .edit-message{
+  display: block;
 }
 
 .incoming .details p{

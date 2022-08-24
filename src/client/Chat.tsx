@@ -10,7 +10,7 @@ import Logger from './Logger';
 function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
-  const [currentMessage, setCurrentMessage] = useState('');
+  const [currentMessage, setCurrentMessage] = useState({message:'', messageId:'', isEditing: false});
   useEffect(() => {
     const renderMessages = async () => {
       if(! data.isFriendShown) return;
@@ -28,14 +28,22 @@ function Chat(data: IChatParams) {
   }, [data]); // Pass data as arg to make sure the fetch is done only when a Friend is selected
 
   const sendMessage = async () => {
-    if(currentMessage.length === 0) return;
-    data.chatClient.handleSendButton(currentMessage);
-
+    if(currentMessage.message.length === 0) return;
+    data.chatClient.handleSendButton(currentMessage.message);
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
-
-    const list = [...messages, message];
+    let list;
+    if (message.isEditing) {
+      list = messages.map(m => {
+        if (m.id === message.id) {
+          return {...message};
+        }
+        return m;
+      });
+    } else {
+      list = [...messages, message];
+    }
     setMessages(list);
-    setCurrentMessage('');
+    setCurrentMessage({message:'', messageId:'', isEditing: false});
   };
 
   if (data.isFriendShown) {
@@ -69,7 +77,9 @@ function Chat(data: IChatParams) {
             message: msg.text,
             isTo: true,
             isFrom: false,
+            isEditing: false,
             fromAvatar: data.friendInChat.avatar,
+            setCurrentMessage: ()=>{}
           };
 
           const list = [...messages, m];
@@ -115,22 +125,24 @@ function Chat(data: IChatParams) {
         { data.isFriendShown ? <FriendInChat {...data.friendInChat} />  : <header></header> }
 
         <div className="chat-box">
-            {messages.map((message: IMessage) => {
-                return <Message key={message.id} {...message} />
-            })}
+          {messages.map((message: IMessage) => {
+            message.isEditing = false;
+            message.setCurrentMessage = setCurrentMessage;
+            return <Message key={message.id} {...message} />
+          })}
         </div>
 
-        { 
+        {
           data.isFriendShown ?
           <form action="#" className="typing-area" data-testid="message-form">
             <input
-              value={currentMessage}
-              onChange={ (evt) => { setCurrentMessage(evt.target.value) }}
+              value={currentMessage.message}
+              onChange={ (evt) => { setCurrentMessage({message:evt.target.value, messageId:currentMessage.messageId, isEditing: currentMessage.isEditing}) }}
               type="text"
               placeholder="Type a message"
             />
             <button onClick={(e) => { e.preventDefault(); sendMessage(); }}>
-              <i className="fab fa-telegram-plane"></i>
+              <i className={ currentMessage.isEditing ? "fa fa-check" : "fab fa-telegram-plane" }></i>
             </button>
             <button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
               <i className='fa fa-phone'></i>
