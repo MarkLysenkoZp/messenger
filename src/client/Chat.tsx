@@ -10,7 +10,7 @@ import Logger from './Logger';
 function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
-  const [currentMessage, setCurrentMessage] = useState({message:'', messageId:'', isEditing: false});
+  const [currentMessage, setCurrentMessage] = useState({ message: '', messageId: '', isEditing: false });
   useEffect(() => {
     const renderMessages = async () => {
       if(! data.isFriendShown) return;
@@ -31,7 +31,7 @@ function Chat(data: IChatParams) {
     if(currentMessage.message.length === 0) return;
     data.chatClient.handleSendButton(currentMessage.message);
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
-    let list;
+    let list = [];
     if (message.isEditing) {
       list = messages.map(m => {
         if (m.id === message.id) {
@@ -43,7 +43,7 @@ function Chat(data: IChatParams) {
       list = [...messages, message];
     }
     setMessages(list);
-    setCurrentMessage({message:'', messageId:'', isEditing: false});
+    setCurrentMessage({ message: '', messageId: '', isEditing: false });
   };
 
   if (data.isFriendShown) {
@@ -137,7 +137,7 @@ function Chat(data: IChatParams) {
           <form action="#" className="typing-area" data-testid="message-form">
             <input
               value={currentMessage.message}
-              onChange={ (evt) => { setCurrentMessage({message:evt.target.value, messageId:currentMessage.messageId, isEditing: currentMessage.isEditing}) }}
+              onChange={ (evt) => { setCurrentMessage({ message: evt.target.value, messageId: currentMessage.messageId, isEditing: currentMessage.isEditing }) }}
               type="text"
               placeholder="Type a message"
             />

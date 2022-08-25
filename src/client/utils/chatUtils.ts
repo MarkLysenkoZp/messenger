@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {IMessage, IUserListItem, IFriendListItem, ICurrentMessage} from '../types';
+import { IMessage, IUserListItem, IFriendListItem, ICurrentMessage } from '../types';
 
 export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendListItem) => {
   const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: friend.id } });
