@@ -6,6 +6,8 @@ import Message from './Message';
 import CurrentUser from './CurrentUser';
 import { fetchMessages, saveMessage } from './utils/chatUtils';
 import Logger from './Logger';
+import SendMessageButton from "./SentMessageButton"
+import EditMessageButton from "./EditMessageButton";
 
 function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
@@ -31,17 +33,21 @@ function Chat(data: IChatParams) {
     if(currentMessage.message.length === 0) return;
     data.chatClient.handleSendButton(currentMessage.message);
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
-    let list = [];
-    if (message.isEditing) {
-      list = messages.map(m => {
-        if (m.id === message.id) {
-          return {...message};
-        }
-        return m;
-      });
-    } else {
-      list = [...messages, message];
-    }
+    const list = [...messages, message];
+    setMessages(list);
+    setCurrentMessage({ message: '', messageId: '', isEditing: false });
+  };
+
+  const updateMessage = async () => {
+    if(currentMessage.message.length === 0) return;
+    data.chatClient.handleSendButton(currentMessage.message);
+    const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
+    const list = messages.map(m => {
+      if (m.id === message.id) {
+        return {...m, ...message};
+      }
+      return m;
+    });
     setMessages(list);
     setCurrentMessage({ message: '', messageId: '', isEditing: false });
   };
@@ -141,9 +147,11 @@ function Chat(data: IChatParams) {
               type="text"
               placeholder="Type a message"
             />
-            <button onClick={(e) => { e.preventDefault(); sendMessage(); }}>
-              <i className={ currentMessage.isEditing ? "fa fa-check" : "fab fa-telegram-plane" }></i>
-            </button>
+            { currentMessage.isEditing ?
+              <EditMessageButton onClick = { (e: any) => { e.preventDefault(); updateMessage(); }} />
+              :
+              <SendMessageButton onClick = { (e: any) => { e.preventDefault(); sendMessage(); }} />
+            }
             <button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
               <i className='fa fa-phone'></i>
             </button>

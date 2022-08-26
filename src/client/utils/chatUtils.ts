@@ -21,7 +21,8 @@ export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendL
 };
 
 export const saveMessage = async (messageObj: ICurrentMessage, userId: number, friendId: number) => {
-  const result: any = await axios.post('/api/save_message', {
+  const endpointUrl = messageObj.isEditing ? '/api/update_message' : '/api/save_message'
+  const result: any = await axios.post(endpointUrl, {
     recipientId: friendId,
     messageObj: messageObj
   });
@@ -33,7 +34,7 @@ export const saveMessage = async (messageObj: ICurrentMessage, userId: number, f
     message: messageObj.isEditing ? messageObj.message : result.data.message,
     isTo: false,
     isFrom: true,
-    isEditing: messageObj.isEditing ? true : false,
+    isEditing: messageObj.isEditing,
     fromAvatar: '',
     setCurrentMessage: ()=>{}
   };
