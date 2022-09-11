@@ -3,7 +3,7 @@ import { sign } from 'jsonwebtoken';
 import 'dotenv/config';
 import { loadEnv, env } from '../env';
 
-loadEnv(); // Executed synchronously before the rest of your app loads
+loadEnv();
 
 export const hashPassword = (password: string) => {
   return hashSync(password, 8);
