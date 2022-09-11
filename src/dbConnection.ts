@@ -6,15 +6,21 @@ import { loadEnv, env } from './env';
 
 loadEnv(); // Executed synchronously before the rest of your app loads
 
-export const sequelize = new Sequelize(
-  env.DB_NAME,
-  env.DB_USER,
-  env.DB_PASSWORD,
-  {
-    host: env.DB_HOST,
-    dialect: 'postgres',
+const dbOptions = () => {
+  if(process.env.NODE_ENV === 'production') {
+    return {
+      ssl: { require: true, rejectUnauthorized: false }
+    }
   }
-);
+
+  return {};
+}
+
+const initSequelize = () => {
+  return new Sequelize(env.DATABASE_URL, { dialectOptions: dbOptions() });
+}
+
+export const sequelize = initSequelize();
 
 export const testConnection = async () => {
   try {
