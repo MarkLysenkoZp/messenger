@@ -1,6 +1,12 @@
 # messenger
 
+Local Environment Setup:
+ - see the config example in .env.example
+ - create a new .env file and put ENV variables names from .env.example to .env
+ - ask 1lyan for values of those variables
+
 To start application locally:
+
 1. npm install
 2. Create DB: npx sequelize-cli db:create
 3. Run migrations: 
