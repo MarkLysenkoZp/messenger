@@ -81,6 +81,23 @@ class ChatClient {
     this.sendToServer(msg);
   }
 
+  // Handles a click on the Update button (or pressing return/enter) by
+  // building a "message" object and sending it to the server.
+  handleUpdateButton(text: string, messageId: string) {
+    var msg: any = {
+      text: text,
+      messageId: messageId,
+      type: "message",
+      id: this.clientID,
+      date: Date.now()
+    };
+    if(this.targetUsername) {
+      msg.target = this.targetUsername;
+      msg.from = this.myUsername;
+    }
+    this.sendToServer(msg);
+  }
+
   // Create the RTCPeerConnection which knows how to talk to our
   // selected STUN/TURN server and then uses getUserMedia() to find
   // our camera and microphone and add that stream to the connection for

@@ -40,7 +40,7 @@ function Chat(data: IChatParams) {
 
   const updateMessage = async () => {
     if(currentMessage.message.length === 0) return;
-    data.chatClient.handleSendButton(currentMessage.message);
+    data.chatClient.handleUpdateButton(currentMessage.message, currentMessage.messageId);
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
     const list = messages.map(m => {
       if (m.id === message.id) {
@@ -77,7 +77,7 @@ function Chat(data: IChatParams) {
         case "message":
           text = "(" + timeStr + ") <b>" + msg.name + "</b>: " + msg.text + "<br>";
           const m = {
-            id: msg.id,
+            id: msg.messageId ? msg.messageId : msg.id,
             userId: data.friendInChat.id,
             recipeintId: CurrentUser.get().id,
             message: msg.text,
@@ -88,7 +88,13 @@ function Chat(data: IChatParams) {
             setCurrentMessage: ()=>{}
           };
 
-          const list = [...messages, m];
+          const list = messages.map(message => {
+            if (m.id === message.id) {
+              return {...message, ...m};
+            }
+            return message;
+          });
+
           setMessages(list);
           break;
 
