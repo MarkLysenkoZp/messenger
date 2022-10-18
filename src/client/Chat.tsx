@@ -4,19 +4,21 @@ import { IChatParams, IMessage } from './types';
 import FriendInChat from './FriendInChat';
 import Message from './Message';
 import CurrentUser from './CurrentUser';
-import { fetchMessages, saveMessage } from './utils/chatUtils';
+import { fetchMessages, saveMessage, removeMessage } from './utils/chatUtils';
 import Logger from './Logger';
 import SendMessageButton from "./SentMessageButton"
 import EditMessageButton from "./EditMessageButton";
+import DeleteMessageDialog from "./DeleteMessageDialog";
 
 function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
   const [currentMessage, setCurrentMessage] = useState({ message: '', messageId: '', isEditing: false });
+  const [deletingMessage, setDeletingMessage] = useState({messageId: ''});
   useEffect(() => {
     const renderMessages = async () => {
       if(! data.isFriendShown) return;
-      
+
       try {
         const messages: IMessage[] = await fetchMessages(CurrentUser.get(), data.friendInChat);
         setMessages(messages);
@@ -25,7 +27,7 @@ function Chat(data: IChatParams) {
         // console.log('Failed to fetch Messages', ex);
       }
     };
-    
+
     renderMessages();
   }, [data]); // Pass data as arg to make sure the fetch is done only when a Friend is selected
 
@@ -52,12 +54,23 @@ function Chat(data: IChatParams) {
     setCurrentMessage({ message: '', messageId: '', isEditing: false });
   };
 
+  const deleteMessage = async () => {
+    if(deletingMessage.messageId.length === 0) return;
+    const message: IMessage = await removeMessage(deletingMessage, CurrentUser.get().id, data.friendInChat.id);
+    data.chatClient.handleDeleteButton(deletingMessage.messageId);
+    const list = messages.filter((m) => m.id !== message.id)
+    setMessages(list);
+    setDeletingMessage({ messageId: '' });
+  };
+
+  const closeDeleteDialog = () => {setDeletingMessage({messageId: ''})}
+
   if (data.isFriendShown) {
     data.chatClient.connection.onmessage = (evt: any) => {
       var text = "";
       var msg = JSON.parse(evt.data);
       Logger.log("Message received: ");
-      
+
       console.dir(msg);
       var time = new Date(msg.date);
       var timeStr = time.toLocaleTimeString();
@@ -84,16 +97,22 @@ function Chat(data: IChatParams) {
             isTo: true,
             isFrom: false,
             isEditing: false,
+            isDeleting: msg.isDeleting,
             fromAvatar: data.friendInChat.avatar,
-            setCurrentMessage: ()=>{}
+            setCurrentMessage: ()=>{},
+            setDeletingMessage: ()=>{}
           };
 
-          const list = messages.map(message => {
+          let list = messages.map(message => {
             if (m.id === message.id) {
               return {...message, ...m};
             }
             return message;
           });
+
+          if (m.isDeleting) {
+            list = list.filter((message) => m.id !== message.id)
+          }
 
           setMessages(list);
           break;
@@ -130,6 +149,13 @@ function Chat(data: IChatParams) {
 
   return (
     <div className="wrapper">
+      {deletingMessage.messageId.length !== 0 ?
+        <DeleteMessageDialog
+          onSubmit = { (e: any) => { e.preventDefault(); deleteMessage() }}
+          onCancel = { (e: any) => {e.preventDefault(); closeDeleteDialog()} } />
+      : ''
+      }
+
       <div>
         <a href="/profile" className="right logout">Profile</a>
       </div>
@@ -140,6 +166,7 @@ function Chat(data: IChatParams) {
           {messages.map((message: IMessage) => {
             message.isEditing = false;
             message.setCurrentMessage = setCurrentMessage;
+            message.setDeletingMessage = setDeletingMessage;
             return <Message key={message.id} {...message} />
           })}
         </div>
