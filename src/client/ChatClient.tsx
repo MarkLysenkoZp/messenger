@@ -57,7 +57,7 @@ class ChatClient {
     }
     
     let serverUrl: any = '';
-    var scheme = "ws";
+    var scheme = "wss";
 
     serverUrl = scheme + "://" + HOST;
 
