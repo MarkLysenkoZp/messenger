@@ -12,7 +12,9 @@ import EditMessageButton from "./EditMessageButton";
 function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
-  const [currentMessage, setCurrentMessage] = useState({ message: '', messageId: '', isEditing: false });
+  const [currentMessage, setCurrentMessage] = useState({ message: '', id: '', isEditing: false });
+  
+  // Fetch a list of previously sent messages when a pages is loaded
   useEffect(() => {
     const renderMessages = async () => {
       if(! data.isFriendShown) return;
@@ -31,28 +33,38 @@ function Chat(data: IChatParams) {
 
   const sendMessage = async () => {
     if(currentMessage.message.length === 0) return;
-    data.chatClient.handleSendButton(currentMessage.message);
+
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
+    data.chatClient.handleSendButton(message.message, message.id);
+    
     const list = [...messages, message];
     setMessages(list);
-    setCurrentMessage({ message: '', messageId: '', isEditing: false });
+    setCurrentMessage({ message: '', id: '', isEditing: false });
   };
 
   const updateMessage = async () => {
     if(currentMessage.message.length === 0) return;
-    data.chatClient.handleUpdateButton(currentMessage.message, currentMessage.messageId);
+
+    data.chatClient.handleUpdateButton(currentMessage.message, currentMessage.id);
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
-    const list = messages.map(m => {
+    const list = replaceMessageInList(message, messages);
+    setMessages(list);
+    setCurrentMessage({ message: '', id: '', isEditing: false });
+  };
+
+  const replaceMessageInList = (message: IMessage, messageList: IMessage[]) => {
+    const list = messageList.map(m => {
       if (m.id === message.id) {
         return {...m, ...message};
       }
       return m;
     });
-    setMessages(list);
-    setCurrentMessage({ message: '', messageId: '', isEditing: false });
+
+    return list;
   };
 
   if (data.isFriendShown) {
+    // This is called when a message is received
     data.chatClient.connection.onmessage = (evt: any) => {
       var text = "";
       var msg = JSON.parse(evt.data);
@@ -63,8 +75,8 @@ function Chat(data: IChatParams) {
       var timeStr = time.toLocaleTimeString();
 
       switch(msg.type) {
-        case "id":
-          data.chatClient.clientID = msg.id;
+        case "clientId":
+          data.chatClient.clientId = msg.clientId;
           let name = CurrentUser.get().nickname;
           data.chatClient.setUsername(name);
           data.chatClient.targetUsername = data.friendInChat.nickname;
@@ -77,24 +89,21 @@ function Chat(data: IChatParams) {
         case "message":
           text = "(" + timeStr + ") <b>" + msg.name + "</b>: " + msg.text + "<br>";
           const m = {
-            id: msg.messageId ? msg.messageId : msg.id,
+            id: msg.id,
             userId: data.friendInChat.id,
             recipeintId: CurrentUser.get().id,
             message: msg.text,
             isTo: true,
             isFrom: false,
-            isEditing: false,
+            isEditing: msg.isEditing,
             fromAvatar: data.friendInChat.avatar,
-            setCurrentMessage: ()=>{}
+            setCurrentMessage: () => {}
           };
-
-          const list = messages.map(message => {
-            if (m.id === message.id) {
-              return {...message, ...m};
-            }
-            return message;
-          });
-
+        
+          let list: IMessage[] = [];
+          if (m.isEditing) list = replaceMessageInList(m, messages);
+          else list = [...messages, m];
+          
           setMessages(list);
           break;
 
@@ -136,6 +145,7 @@ function Chat(data: IChatParams) {
       <section className="chat-area">
         { data.isFriendShown ? <FriendInChat {...data.friendInChat} />  : <header></header> }
 
+        {/* Render a list of Messages */}
         <div className="chat-box">
           {messages.map((message: IMessage) => {
             message.isEditing = false;
@@ -149,7 +159,7 @@ function Chat(data: IChatParams) {
           <form action="#" className="typing-area" data-testid="message-form">
             <input
               value={currentMessage.message}
-              onChange={ (evt) => { setCurrentMessage({ message: evt.target.value, messageId: currentMessage.messageId, isEditing: currentMessage.isEditing }) }}
+              onChange={ (evt) => { setCurrentMessage({ message: evt.target.value, id: currentMessage.id, isEditing: currentMessage.isEditing }) }}
               type="text"
               placeholder="Type a message"
             />

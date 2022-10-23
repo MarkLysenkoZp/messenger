@@ -13,7 +13,7 @@ export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendL
       isFrom: m.userId == currentUser.id,
       isEditing: m.isEditing,
       fromAvatar: m.recipientId == currentUser.id ? friend.avatar : '',
-      setCurrentMessage: ()=>{}
+      setCurrentMessage: () => {}
     };
   });
 
@@ -28,10 +28,10 @@ export const saveMessage = async (messageObj: ICurrentMessage, userId: number, f
   });
 
   return {
-    id: messageObj.isEditing ? messageObj.messageId : result.data.id,
+    id: result.data.id,
     userId: userId,
     recipeintId: friendId,
-    message: messageObj.isEditing ? messageObj.message : result.data.message,
+    message: result.data.message,
     isTo: false,
     isFrom: true,
     isEditing: messageObj.isEditing,

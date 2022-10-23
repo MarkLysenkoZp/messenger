@@ -35,7 +35,7 @@ export interface IMessage {
 }
 
 export interface ICurrentMessage {
-  messageId: string;
+  id: string;
   message: string;
   isEditing: boolean;
 }

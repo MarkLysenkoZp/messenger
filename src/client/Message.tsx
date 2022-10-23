@@ -6,7 +6,7 @@ function Message(data: IMessage) {
 
   const onClick = (event: any) => {
     event.preventDefault();
-    data.setCurrentMessage({ message: data.message, messageId: data.id, isEditing: true })
+    data.setCurrentMessage({ message: data.message, id: data.id, isEditing: true })
   }
 
   return (
