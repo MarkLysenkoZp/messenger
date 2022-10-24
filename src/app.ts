@@ -15,6 +15,7 @@ import searchUsersRouter from './routes/api/searchUsers';
 import addFriendRouter from './routes/api/addFriend';
 import fetchFriendsRouter from './routes/api/fetchFriends';
 import saveMessageRouter from './routes/api/saveMessage';
+import updateMessageRouter from './routes/api/updateMessage';
 import fetchMessagesRouter from './routes/api/fetchMessages';
 
 const app: Express = express();
@@ -42,6 +43,7 @@ app.use('/', searchUsersRouter);
 app.use('/', addFriendRouter);
 app.use('/', fetchFriendsRouter);
 app.use('/', saveMessageRouter);
+app.use('/', updateMessageRouter);
 app.use('/', fetchMessagesRouter);
 
 // catch 404 and forward to error handler

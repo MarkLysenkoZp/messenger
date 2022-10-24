@@ -8,10 +8,9 @@ saveMessageRouter.post('/api/save_message', auth, async  (req: Request, res: Res
     const result = await Message.create({
       userId: req.currentUser.id,
       recipientId: req.body.recipientId,
-      message: req.body.message,
+      message: req.body.messageObj.message,
       status: 'sent'
     });
-
     res.json(result);
   }
   catch(ex: any) {

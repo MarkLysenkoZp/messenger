@@ -29,5 +29,13 @@ export interface IMessage {
   message: string;
   isTo: boolean;
   isFrom: boolean;
+  isEditing: boolean;
   fromAvatar: string;
+  setCurrentMessage: Function;
+}
+
+export interface ICurrentMessage {
+  id: string;
+  message: string;
+  isEditing: boolean;
 }

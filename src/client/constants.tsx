@@ -15,7 +15,9 @@ export const emptyMessage: IMessage = {
   message: '',
   isTo: false,
   isFrom: true,
-  fromAvatar: ''
+  isEditing: false,
+  fromAvatar: '',
+  setCurrentMessage: ()=>{}
 };
 
 export const TERM_MIN_LENGHT = 3;
