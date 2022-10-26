@@ -14,7 +14,7 @@ function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
   const [currentMessage, setCurrentMessage] = useState({ message: '', id: '', isEditing: false });
-  const [deletingMessage, setDeletingMessage] = useState({messageId: ''});
+  const [deletedMessage, setDeletedMessage] = useState({id: ''});
 
   // Fetch a list of previously sent messages when a pages is loaded
   useEffect(() => {
@@ -66,15 +66,15 @@ function Chat(data: IChatParams) {
   };
 
   const deleteMessage = async () => {
-    if(deletingMessage.messageId.length === 0) return;
-    const message: IMessage = await removeMessage(deletingMessage, CurrentUser.get().id, data.friendInChat.id);
-    data.chatClient.handleDeleteButton(deletingMessage.messageId);
+    if(deletedMessage.id.length === 0) return;
+    const message: IMessage = await removeMessage(deletedMessage, CurrentUser.get().id, data.friendInChat.id);
+    data.chatClient.handleDeleteButton(deletedMessage.id);
     const list = messages.filter((m) => m.id !== message.id)
     setMessages(list);
-    setDeletingMessage({ messageId: '' });
+    setDeletedMessage({ id: '' });
   };
 
-  const closeDeleteDialog = () => {setDeletingMessage({messageId: ''})}
+  const closeDeleteDialog = () => {setDeletedMessage({id: ''})}
 
   if (data.isFriendShown) {
     // This is called when a message is received
@@ -109,16 +109,16 @@ function Chat(data: IChatParams) {
             isTo: true,
             isFrom: false,
             isEditing: msg.isEditing,
-            isDeleting: msg.isDeleting,
+            isDeleted: msg.isDeleted,
             fromAvatar: data.friendInChat.avatar,
             setCurrentMessage: () => {},
-            setDeletingMessage: () => {}
+            setDeletedMessage: () => {}
           };
 
           let list: IMessage[] = [];
           if (m.isEditing) list = replaceMessageInList(m, messages);
           else list = [...messages, m];
-          if (m.isDeleting) list = list.filter((message) => m.id !== message.id)
+          if (m.isDeleted) list = list.filter((message) => m.id !== message.id)
 
           setMessages(list);
           break;
@@ -155,7 +155,7 @@ function Chat(data: IChatParams) {
 
   return (
     <div className="wrapper">
-      {deletingMessage.messageId.length !== 0 ?
+      {deletedMessage.id.length !== 0 ?
         <DeleteMessageDialog
           onSubmit = { (e: any) => { e.preventDefault(); deleteMessage() }}
           onCancel = { (e: any) => {e.preventDefault(); closeDeleteDialog()} } />
@@ -173,7 +173,7 @@ function Chat(data: IChatParams) {
           {messages.map((message: IMessage) => {
             message.isEditing = false;
             message.setCurrentMessage = setCurrentMessage;
-            message.setDeletingMessage = setDeletingMessage;
+            message.setDeletedMessage = setDeletedMessage;
             return <Message key={message.id} {...message} />
           })}
         </div>

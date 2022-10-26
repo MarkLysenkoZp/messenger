@@ -124,7 +124,7 @@ class ChatClient {
       messageId: messageId,
       type: "message",
       id: this.clientID,
-      isDeleting: true,
+      isDeleted: true,
       date: Date.now()
     };
     this.sendToServer(msg);

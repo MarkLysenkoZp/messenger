@@ -11,7 +11,7 @@ function Message(data: IMessage) {
 
   const deleteMessage = (event: any) => {
     event.preventDefault();
-    data.setDeletingMessage({ id: data.id })
+    data.setDeletedMessage({ id: data.id })
   }
 
   return (

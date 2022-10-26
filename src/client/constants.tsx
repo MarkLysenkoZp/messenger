@@ -16,10 +16,10 @@ export const emptyMessage: IMessage = {
   isTo: false,
   isFrom: true,
   isEditing: false,
-  isDeleting: false,
+  isDeleted: false,
   fromAvatar: '',
   setCurrentMessage: ()=>{},
-  setDeletingMessage: ()=>{}
+  setDeletedMessage: ()=>{}
 };
 
 export const TERM_MIN_LENGHT = 3;
