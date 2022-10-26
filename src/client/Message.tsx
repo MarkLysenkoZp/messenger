@@ -6,12 +6,12 @@ function Message(data: IMessage) {
 
   const editMessage = (event: any) => {
     event.preventDefault();
-    data.setCurrentMessage({ message: data.message, messageId: data.id, isEditing: true })
+    data.setCurrentMessage({ message: data.message, id: data.id, isEditing: true })
   }
 
   const deleteMessage = (event: any) => {
     event.preventDefault();
-    data.setDeletingMessage({ messageId: data.id })
+    data.setDeletingMessage({ id: data.id })
   }
 
   return (

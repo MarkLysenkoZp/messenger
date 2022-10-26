@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {IMessage, IUserListItem, IFriendListItem, ICurrentMessage, IDeletingMessage} from '../types';
+import { IMessage, IUserListItem, IFriendListItem, ICurrentMessage, IDeletingMessage } from '../types';
 
 export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendListItem) => {
   const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: friend.id } });
@@ -14,8 +14,8 @@ export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendL
       isEditing: m.isEditing,
       isDeleting: m.isDeleting,
       fromAvatar: m.recipientId == currentUser.id ? friend.avatar : '',
-      setCurrentMessage: ()=>{},
-      setDeletingMessage: ()=>{}
+      setCurrentMessage: () => {},
+      setDeletingMessage: () => {}
     };
   });
 
@@ -30,17 +30,17 @@ export const saveMessage = async (messageObj: ICurrentMessage, userId: number, f
   });
 
   return {
-    id: messageObj.isEditing ? messageObj.messageId : result.data.id,
+    id: result.data.id,
     userId: userId,
     recipeintId: friendId,
-    message: messageObj.isEditing ? messageObj.message : result.data.message,
+    message: result.data.message,
     isTo: false,
     isFrom: true,
     isEditing: messageObj.isEditing,
     isDeleting: false,
     fromAvatar: '',
-    setCurrentMessage: ()=>{},
-    setDeletingMessage: ()=>{}
+    setCurrentMessage: () => {},
+    setDeletingMessage: () => {}
   };
 };
 

@@ -6,7 +6,7 @@ class ChatClient {
   remoteVideo: string;
   hangUpButton: string;
   connection: any;
-  clientID: number;
+  clientId: number;
   myUsername: string;
   targetUsername: string;
   myPeerConnection: any;
@@ -19,8 +19,7 @@ class ChatClient {
     this.hangUpButton = hangUpButtonId;
 
     this.connection = null;
-    this.clientID = 0;
-
+    this.clientId = 0;
     this.myUsername = '';
     this.targetUsername = '';        // To store username of other peer
     this.myPeerConnection = null;    // RTCPeerConnection
@@ -35,7 +34,7 @@ class ChatClient {
     this.connection.send(msgJSON);
   }
 
-  // Called when the "id" message is received; this message is sent by the
+  // Called when the "clientId" message is received; this message is sent by the
   // server to assign this login session a unique ID number; in response,
   // this function sends a "username" message to set our username for this
   // session.
@@ -44,7 +43,7 @@ class ChatClient {
     this.sendToServer({
       name: this.myUsername,
       date: Date.now(),
-      id: this.clientID,
+      clientId: this.clientId,
       type: "username"
     });
   }
@@ -67,12 +66,32 @@ class ChatClient {
 
   // Handles a click on the Send button (or pressing return/enter) by
   // building a "message" object and sending it to the server.
-  handleSendButton(text: string) {
+  handleSendButton(text: string, id: string) {
     var msg: any = {
       text: text,
       type: "message",
-      id: this.clientID,
-      date: Date.now()
+      clientId: this.clientId,
+      date: Date.now(),
+      id: id,
+      isEditing: false,
+    };
+    if(this.targetUsername) {
+      msg.target = this.targetUsername;
+      msg.from = this.myUsername;
+    }
+    this.sendToServer(msg);
+  }
+
+  // Handles a click on the Update button (or pressing return/enter) by
+  // building a "message" object and sending it to the server.
+  handleUpdateButton(text: string, id: string) {
+    var msg: any = {
+      text: text,
+      id: id,
+      type: "message",
+      clientId: this.clientId,
+      date: Date.now(),
+      isEditing: true,
     };
     if(this.targetUsername) {
       msg.target = this.targetUsername;

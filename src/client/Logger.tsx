@@ -10,7 +10,8 @@ class Logger {
   static logError(text: String) {
     var time = new Date();
   
-    console.trace("[" + time.toLocaleTimeString() + "] " + text);
+    console.trace(`Time: ${time.toLocaleTimeString()}`);
+    console.trace('Message:', text);
   }
 
   // Handles reporting errors. Currently, we just dump stuff to console but

@@ -5,15 +5,15 @@ import { auth } from '../../middleware/auth';
 
 updateMessageRouter.post('/api/update_message', auth, async  (req: Request, res: Response) => {
   try {
-    const result = await Message.update(
+    const result: any = await Message.update(
       {
         message: req.body.messageObj.message,
       },
       {
-        where: { id: req.body.messageObj.messageId },
+        where: { id: req.body.messageObj.id },
       }
     );
-    res.json(result);
+    res.json({ ...req.body.messageObj });
   }
   catch(ex: any) {
     return res.status(500).end();

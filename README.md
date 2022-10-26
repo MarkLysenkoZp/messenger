@@ -1,14 +1,20 @@
 # messenger
 
-To start application:
+Local Environment Setup:
+ - see the config example in .env.example
+ - create a new .env file and put ENV variables names from .env.example to .env
+ - ask 1lyan for values of those variables
+
+To start application locally:
+
 1. npm install
 2. Create DB: npx sequelize-cli db:create
 3. Run migrations: 
- - npm run migrate:up
+ - DATABASE_URL="postgres://postgres@localhost:5432/messenger_development" npm run migrate:up
 3. npm run dev
 4. http://localhost:3000
 
-How to create a Pull Request:
+# How to create a Pull Request:
 0. Switch back to main branch: git checkout main
 1. Pull from main branch: git pull origin main
 2. Create a new branch: git checkout -b new-branch
@@ -23,5 +29,11 @@ How to create a Pull Request:
 11. Go to your console and delete the obsolete branch:
  - git branch -D new-branch
 
- How to run tests in console:
- npm run test
+# How to run tests in console:
+ - npm run test
+
+# Heroku instance:
+ - https://m3ss3nger.herokuapp.com/
+
+# WebSocket transport repo:
+ - https://github.com/1lyan/chat-transport
