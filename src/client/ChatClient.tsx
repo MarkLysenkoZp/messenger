@@ -100,30 +100,13 @@ class ChatClient {
     this.sendToServer(msg);
   }
 
-  // Handles a click on the Update button (or pressing return/enter) by
-  // building a "message" object and sending it to the server.
-  handleUpdateButton(text: string, messageId: string) {
-    var msg: any = {
-      text: text,
-      messageId: messageId,
-      type: "message",
-      id: this.clientID,
-      date: Date.now()
-    };
-    if(this.targetUsername) {
-      msg.target = this.targetUsername;
-      msg.from = this.myUsername;
-    }
-    this.sendToServer(msg);
-  }
-
   // Handles a click on the Delete button (or pressing return/enter) by
   // building a "message" object and sending it to the server.
   handleDeleteButton(messageId: string) {
     var msg: any = {
       messageId: messageId,
       type: "message",
-      id: this.clientID,
+      id: this.clientId,
       isDeleted: true,
       date: Date.now()
     };
