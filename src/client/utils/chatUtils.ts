@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IMessage, IUserListItem, IFriendListItem, ICurrentMessage, IDeletingMessage } from '../types';
+import { IMessage, IUserListItem, IFriendListItem, ICurrentMessage, IDeletedMessage } from '../types';
 
 export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendListItem) => {
   const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: friend.id } });
@@ -44,7 +44,7 @@ export const saveMessage = async (messageObj: ICurrentMessage, userId: number, f
   };
 };
 
-export const removeMessage = async (messageObj: IDeletingMessage, userId: number, friendId: number) => {
+export const removeMessage = async (messageObj: IDeletedMessage, userId: number, friendId: number) => {
   const endpointUrl = '/api/delete_message/' + messageObj.id;
   const result: any = await axios.delete(endpointUrl);
 

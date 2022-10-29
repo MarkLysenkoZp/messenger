@@ -106,7 +106,7 @@ class ChatClient {
     var msg: any = {
       messageId: messageId,
       type: "message",
-      id: this.clientId,
+      clientId: this.clientId,
       isDeleted: true,
       date: Date.now()
     };

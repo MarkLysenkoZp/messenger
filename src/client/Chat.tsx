@@ -65,11 +65,15 @@ function Chat(data: IChatParams) {
     return list;
   };
 
+  const deleteMessageFromList = (message: IMessage, messageList: IMessage[]) => {
+    return messageList.filter((m) => m.id !== message.id)
+  }
+
   const deleteMessage = async () => {
     if(deletedMessage.id.length === 0) return;
     const message: IMessage = await removeMessage(deletedMessage, CurrentUser.get().id, data.friendInChat.id);
     data.chatClient.handleDeleteButton(deletedMessage.id);
-    const list = messages.filter((m) => m.id !== message.id)
+    const list = deleteMessageFromList(message, messages);
     setMessages(list);
     setDeletedMessage({ id: '' });
   };
@@ -102,7 +106,7 @@ function Chat(data: IChatParams) {
         case "message":
           text = "(" + timeStr + ") <b>" + msg.name + "</b>: " + msg.text + "<br>";
           const m = {
-            id: msg.messageId ? msg.messageId : msg.id,
+            id: msg.id,
             userId: data.friendInChat.id,
             recipeintId: CurrentUser.get().id,
             message: msg.text,
@@ -118,7 +122,7 @@ function Chat(data: IChatParams) {
           let list: IMessage[] = [];
           if (m.isEditing) list = replaceMessageInList(m, messages);
           else list = [...messages, m];
-          if (m.isDeleted) list = list.filter((message) => m.id !== message.id)
+          if (m.isDeleted) list = deleteMessageFromList(m, list);
 
           setMessages(list);
           break;

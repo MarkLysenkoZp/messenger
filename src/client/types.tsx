@@ -42,6 +42,6 @@ export interface ICurrentMessage {
   isEditing: boolean;
 }
 
-export interface IDeletingMessage {
+export interface IDeletedMessage {
   id: string;
 }
