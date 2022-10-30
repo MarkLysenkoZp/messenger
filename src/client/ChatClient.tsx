@@ -104,7 +104,8 @@ class ChatClient {
   // building a "message" object and sending it to the server.
   handleDeleteButton(messageId: string) {
     var msg: any = {
-      messageId: messageId,
+      text: '',
+      id: messageId,
       type: "message",
       clientId: this.clientId,
       isDeleted: true,

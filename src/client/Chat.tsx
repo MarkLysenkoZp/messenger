@@ -120,9 +120,12 @@ function Chat(data: IChatParams) {
           };
 
           let list: IMessage[] = [];
+          // A message was edited
           if (m.isEditing) list = replaceMessageInList(m, messages);
+          // Or a message was deleted
+          else if (m.isDeleted) list = deleteMessageFromList(m, messages);
+          // Or a message was added
           else list = [...messages, m];
-          if (m.isDeleted) list = deleteMessageFromList(m, list);
 
           setMessages(list);
           break;
