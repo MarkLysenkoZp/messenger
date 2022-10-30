@@ -90,6 +90,10 @@ body{
   cursor: pointer;
   margin-top: 13px;
 }
+.form form .button input:hover {
+  background-color: rgb(59, 94, 165);
+  color: rgb(0, 0, 0);
+}
 .form form .field i{
   position: absolute;
   right: 15px;
@@ -166,6 +170,10 @@ a.right {
   border-radius: 5px;
   font-size: 17px;
 }
+.users header .logout:hover {
+  background-color: rgb(59, 94, 165);
+  color: rgb(0, 0, 0);
+}
 .users .search{
   margin: 20px 0;
   display: flex;
@@ -206,6 +214,10 @@ a.right {
   outline: none;
   border-radius: 0 5px 5px 0;
   transition: all 0.2s ease;
+}
+.users .search button:hover {
+  background-color: rgb(59, 94, 165);
+  color: rgb(0, 0, 0);
 }
 .users .search button.active{
   background: #333;
@@ -375,6 +387,12 @@ a.right {
   border-radius: 0 5px 5px 0;
   transition: all 0.3s ease;
 }
+
+.typing-area button:hover {
+  background-color: rgb(59, 94, 165);
+  color: rgb(0, 0, 0);
+}
+
 .typing-area button.active{
   opacity: 1;
   pointer-events: auto;
