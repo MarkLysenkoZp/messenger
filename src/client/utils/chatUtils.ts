@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IMessage, IUserListItem, IFriendListItem, ICurrentMessage } from '../types';
+import { IMessage, IUserListItem, IFriendListItem, ICurrentMessage, IDeletedMessage } from '../types';
 
 export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendListItem) => {
   const result: any = await axios.get('/api/fetch_messages',  { params: { friendId: friend.id } });
@@ -12,8 +12,10 @@ export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendL
       isTo: m.recipientId == currentUser.id,
       isFrom: m.userId == currentUser.id,
       isEditing: m.isEditing,
+      isDeleted: m.isDeleted,
       fromAvatar: m.recipientId == currentUser.id ? friend.avatar : '',
-      setCurrentMessage: () => {}
+      setCurrentMessage: () => {},
+      setDeletedMessage: () => {}
     };
   });
 
@@ -35,7 +37,28 @@ export const saveMessage = async (messageObj: ICurrentMessage, userId: number, f
     isTo: false,
     isFrom: true,
     isEditing: messageObj.isEditing,
+    isDeleted: false,
     fromAvatar: '',
-    setCurrentMessage: ()=>{}
+    setCurrentMessage: () => {},
+    setDeletedMessage: () => {}
+  };
+};
+
+export const removeMessage = async (messageObj: IDeletedMessage, userId: number, friendId: number) => {
+  const endpointUrl = '/api/delete_message/' + messageObj.id;
+  const result: any = await axios.delete(endpointUrl);
+
+  return {
+    id: Number(messageObj.id),
+    userId: userId,
+    recipeintId: friendId,
+    message: '',
+    isTo: false,
+    isFrom: true,
+    isEditing: false,
+    isDeleted: true,
+    fromAvatar: '',
+    setCurrentMessage: () => {},
+    setDeletedMessage: () => {}
   };
 };

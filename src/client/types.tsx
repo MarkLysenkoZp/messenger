@@ -30,12 +30,18 @@ export interface IMessage {
   isTo: boolean;
   isFrom: boolean;
   isEditing: boolean;
+  isDeleted: boolean;
   fromAvatar: string;
   setCurrentMessage: Function;
+  setDeletedMessage: Function;
 }
 
 export interface ICurrentMessage {
   id: string;
   message: string;
   isEditing: boolean;
+}
+
+export interface IDeletedMessage {
+  id: string;
 }

@@ -4,21 +4,23 @@ import { IChatParams, IMessage } from './types';
 import FriendInChat from './FriendInChat';
 import Message from './Message';
 import CurrentUser from './CurrentUser';
-import { fetchMessages, saveMessage } from './utils/chatUtils';
+import { fetchMessages, saveMessage, removeMessage } from './utils/chatUtils';
 import Logger from './Logger';
 import SendMessageButton from "./SentMessageButton"
 import EditMessageButton from "./EditMessageButton";
+import DeleteMessageDialog from "./DeleteMessageDialog";
 
 function Chat(data: IChatParams) {
   const emptyMessages: IMessage[] = [];
   const [messages, setMessages] = useState(emptyMessages);
   const [currentMessage, setCurrentMessage] = useState({ message: '', id: '', isEditing: false });
-  
+  const [deletedMessage, setDeletedMessage] = useState({id: ''});
+
   // Fetch a list of previously sent messages when a pages is loaded
   useEffect(() => {
     const renderMessages = async () => {
       if(! data.isFriendShown) return;
-      
+
       try {
         const messages: IMessage[] = await fetchMessages(CurrentUser.get(), data.friendInChat);
         setMessages(messages);
@@ -27,7 +29,7 @@ function Chat(data: IChatParams) {
         // console.log('Failed to fetch Messages', ex);
       }
     };
-    
+
     renderMessages();
   }, [data]); // Pass data as arg to make sure the fetch is done only when a Friend is selected
 
@@ -36,7 +38,7 @@ function Chat(data: IChatParams) {
 
     const message: IMessage = await saveMessage(currentMessage, CurrentUser.get().id, data.friendInChat.id);
     data.chatClient.handleSendButton(message.message, message.id);
-    
+
     const list = [...messages, message];
     setMessages(list);
     setCurrentMessage({ message: '', id: '', isEditing: false });
@@ -63,13 +65,28 @@ function Chat(data: IChatParams) {
     return list;
   };
 
+  const deleteMessageFromList = (message: IMessage, messageList: IMessage[]) => {
+    return messageList.filter((m) => m.id !== message.id)
+  }
+
+  const deleteMessage = async () => {
+    if(deletedMessage.id.length === 0) return;
+    const message: IMessage = await removeMessage(deletedMessage, CurrentUser.get().id, data.friendInChat.id);
+    data.chatClient.handleDeleteButton(deletedMessage.id);
+    const list = deleteMessageFromList(message, messages);
+    setMessages(list);
+    setDeletedMessage({ id: '' });
+  };
+
+  const closeDeleteDialog = () => {setDeletedMessage({id: ''})}
+
   if (data.isFriendShown) {
     // This is called when a message is received
     data.chatClient.connection.onmessage = (evt: any) => {
       var text = "";
       var msg = JSON.parse(evt.data);
       Logger.log("Message received: ");
-      
+
       console.dir(msg);
       var time = new Date(msg.date);
       var timeStr = time.toLocaleTimeString();
@@ -96,14 +113,20 @@ function Chat(data: IChatParams) {
             isTo: true,
             isFrom: false,
             isEditing: msg.isEditing,
+            isDeleted: msg.isDeleted,
             fromAvatar: data.friendInChat.avatar,
-            setCurrentMessage: () => {}
+            setCurrentMessage: () => {},
+            setDeletedMessage: () => {}
           };
-        
+
           let list: IMessage[] = [];
+          // A message was edited
           if (m.isEditing) list = replaceMessageInList(m, messages);
+          // Or a message was deleted
+          else if (m.isDeleted) list = deleteMessageFromList(m, messages);
+          // Or a message was added
           else list = [...messages, m];
-          
+
           setMessages(list);
           break;
 
@@ -139,6 +162,13 @@ function Chat(data: IChatParams) {
 
   return (
     <div className="wrapper">
+      {deletedMessage.id.length !== 0 ?
+        <DeleteMessageDialog
+          onSubmit = { (e: any) => { e.preventDefault(); deleteMessage() }}
+          onCancel = { (e: any) => {e.preventDefault(); closeDeleteDialog()} } />
+      : ''
+      }
+
       <div>
         <a href="/profile" className="right logout">Profile</a>
       </div>
@@ -150,6 +180,7 @@ function Chat(data: IChatParams) {
           {messages.map((message: IMessage) => {
             message.isEditing = false;
             message.setCurrentMessage = setCurrentMessage;
+            message.setDeletedMessage = setDeletedMessage;
             return <Message key={message.id} {...message} />
           })}
         </div>
