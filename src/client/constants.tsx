@@ -18,6 +18,7 @@ export const emptyMessage: IMessage = {
   isEditing: false,
   isDeleted: false,
   fromAvatar: '',
+  status: '',
   setCurrentMessage: ()=>{},
   setDeletedMessage: ()=>{}
 };

@@ -13,6 +13,7 @@ updateMessageRouter.post('/api/update_message', auth, async  (req: Request, res:
         where: { id: req.body.messageObj.id },
       }
     );
+    req.body.messageObj.status = 'edited'
     res.json({ ...req.body.messageObj });
   }
   catch(ex: any) {

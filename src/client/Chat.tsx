@@ -115,6 +115,7 @@ function Chat(data: IChatParams) {
             isEditing: msg.isEditing,
             isDeleted: msg.isDeleted,
             fromAvatar: data.friendInChat.avatar,
+            status: msg.status,
             setCurrentMessage: () => {},
             setDeletedMessage: () => {}
           };

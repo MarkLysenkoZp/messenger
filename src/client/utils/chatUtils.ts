@@ -14,6 +14,7 @@ export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendL
       isEditing: m.isEditing,
       isDeleted: m.isDeleted,
       fromAvatar: m.recipientId == currentUser.id ? friend.avatar : '',
+      status: m.createdAt < m.updatedAt ? 'edited' : '',
       setCurrentMessage: () => {},
       setDeletedMessage: () => {}
     };
@@ -39,6 +40,7 @@ export const saveMessage = async (messageObj: ICurrentMessage, userId: number, f
     isEditing: messageObj.isEditing,
     isDeleted: false,
     fromAvatar: '',
+    status: result.data.status,
     setCurrentMessage: () => {},
     setDeletedMessage: () => {}
   };
@@ -58,6 +60,7 @@ export const removeMessage = async (messageObj: IDeletedMessage, userId: number,
     isEditing: false,
     isDeleted: true,
     fromAvatar: '',
+    status: result.data.status,
     setCurrentMessage: () => {},
     setDeletedMessage: () => {}
   };
