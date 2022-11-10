@@ -24,7 +24,6 @@ function SearchListItem(user: ISearchListItem) {
             <img src={user.avatar} alt="" />
             <div className='details'>
                 <span>{user.nickname}</span> 
-                <p>Online</p>
             </div>
         </div>
         <a href="#" onClick={addFriend} className="logout">
