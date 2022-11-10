@@ -459,17 +459,3 @@ body{
   height: 70px;
   width: 70px;
 }
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 8px 10px;
-  
-  border: 0;
-  background-color: #1cbc11;
-  cursor: pointer;
-  
-  font-family: inherit;
-  font-size: 16px;
-  color: #fff;
-}
