@@ -4,9 +4,14 @@ import { IMessage } from './types';
 function Message(data: IMessage) {
   const css = data.isTo ? 'chat incoming' : 'chat outgoing';
 
-  const onClick = (event: any) => {
+  const editMessage = (event: any) => {
     event.preventDefault();
     data.setCurrentMessage({ message: data.message, id: data.id, isEditing: true })
+  }
+
+  const deleteMessage = (event: any) => {
+    event.preventDefault();
+    data.setDeletedMessage({ id: data.id })
   }
 
   return (
@@ -14,7 +19,13 @@ function Message(data: IMessage) {
       { data.isTo ? <img data-testid='fromAvatar' src={data.fromAvatar} alt="" /> : ''}
       <div className="details">
         <p>{data.message}</p>
-        { data.isFrom ? <a href="#" onClick={onClick} className="edit-message fa fa-edit"></a> : ''}
+        { data.isFrom ?
+          <div className="massage-actions">
+            <a href="#" onClick={editMessage} className="edit-message fa fa-edit"></a>
+            <a href="#" onClick={deleteMessage} className="delete-message fa fa-trash"></a>
+          </div>
+          : ''
+        }
       </div>
     </div>
   );

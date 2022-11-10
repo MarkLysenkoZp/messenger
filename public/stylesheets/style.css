@@ -297,7 +297,7 @@ body{
     box-shadow: 0 0 32px rgb(0 0 0 / 8%),
                 0rem 16px 16px -16px rgb(0 0 0 / 10%);
   }
-   
+
   .chat-box .incoming{
     display: flex;
     align-items: flex-end;
@@ -331,16 +331,21 @@ body{
   border-radius: 18px 18px 18px 0;
 }
 
-.outgoing .details .edit-message{
+.outgoing .details .massage-actions{
   display: none;
   position: absolute;
   top: 12px;
-  left: -20px;
-  color: #777;
+  left: -41px;
 }
 
-.outgoing:hover .details .edit-message{
+.outgoing:hover .details .massage-actions{
   display: block;
+}
+
+.outgoing .details .edit-message,
+.outgoing .details .delete-message{
+  color: #777;
+  margin-right: 5px;
 }
 
 .incoming .details p{
@@ -455,7 +460,30 @@ body{
   color: green;
 }
 
-.profile-avatar { 
+.profile-avatar {
   height: 50px;
   width: 50px;
+}
+
+.delete-message-dialog {
+  background: #fff;
+  width: 200px;
+  height: 120px;
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  border: 3px solid #aaa;
+  border-radius: 8px;
+  top: 200px;
+  box-shadow: 0px 0px 32px 0px #777;
+  padding: 25px;
+}
+
+.delete-message-dialog button {
+  margin: 10px;
+  width: 24px;
+  cursor: pointer;
 }

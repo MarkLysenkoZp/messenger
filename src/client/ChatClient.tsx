@@ -20,7 +20,6 @@ class ChatClient {
 
     this.connection = null;
     this.clientId = 0;
-    
     this.myUsername = '';
     this.targetUsername = '';        // To store username of other peer
     this.myPeerConnection = null;    // RTCPeerConnection
@@ -30,11 +29,11 @@ class ChatClient {
 
   sendToServer(msg: any) {
     var msgJSON = JSON.stringify(msg);
-  
+
     Logger.log("Sending '" + msg.type + "' message: " + msgJSON);
     this.connection.send(msgJSON);
   }
-  
+
   // Called when the "clientId" message is received; this message is sent by the
   // server to assign this login session a unique ID number; in response,
   // this function sends a "username" message to set our username for this
@@ -55,7 +54,7 @@ class ChatClient {
       console.log('Attempt to connect when a connection already exists. Prevented');
       return;
     }
-    
+
     let serverUrl: any = '';
     var scheme = "wss";
 
@@ -98,6 +97,20 @@ class ChatClient {
       msg.target = this.targetUsername;
       msg.from = this.myUsername;
     }
+    this.sendToServer(msg);
+  }
+
+  // Handles a click on the Delete button (or pressing return/enter) by
+  // building a "message" object and sending it to the server.
+  handleDeleteButton(messageId: string) {
+    var msg: any = {
+      text: '',
+      id: messageId,
+      type: "message",
+      clientId: this.clientId,
+      isDeleted: true,
+      date: Date.now()
+    };
     this.sendToServer(msg);
   }
 
@@ -187,10 +200,10 @@ class ChatClient {
 
   handleTrackEvent(event: any) {
     Logger.log("*** Track event");
-    
+
     const remoteVideo: any = document.getElementById(this.remoteVideo);
     remoteVideo.srcObject = event.streams[0];
-    
+
     const button: any = document.getElementById(this.hangUpButton);
     button.disabled = false;
   }
@@ -396,7 +409,7 @@ class ChatClient {
 
       try {
         this.webcamStream = await navigator.mediaDevices.getUserMedia(MEDIA_CONSTRAINTS);
-        
+
         const localVideo: any = document.getElementById(this.localVideo)
         localVideo.srcObject = this.webcamStream;
       } catch(err) {
