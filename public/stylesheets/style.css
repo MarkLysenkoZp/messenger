@@ -6,6 +6,7 @@
   text-decoration: none;
   font-family: 'Poppins', sans-serif;
 }
+
 body{
   display: flex;
   align-items: center;
@@ -116,15 +117,6 @@ body{
 }
 .form .link a:hover{
   text-decoration: underline;
-}
-
-.right {
-  position: absolute;
-  right: 2px;
-  top: 2px;
-}
-a.right {
-  color: white;
 }
 
 /* Users List CSS Start */
@@ -464,6 +456,20 @@ a.right {
 }
 
 .profile-avatar { 
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  
+  border: 0;
+  background-color: #1cbc11;
+  cursor: pointer;
+  
+  font-family: inherit;
+  font-size: 16px;
+  color: #fff;
 }

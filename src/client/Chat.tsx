@@ -139,9 +139,7 @@ function Chat(data: IChatParams) {
 
   return (
     <div className="wrapper">
-      <div>
-        <a href="/profile" className="right logout">Profile</a>
-      </div>
+
       <section className="chat-area">
         { data.isFriendShown ? <FriendInChat {...data.friendInChat} />  : <header></header> }
 
