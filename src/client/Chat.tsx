@@ -169,9 +169,7 @@ function Chat(data: IChatParams) {
       : ''
       }
 
-      <div>
-        <a href="/profile" className="right logout">Profile</a>
-      </div>
+     
       <section className="chat-area">
         { data.isFriendShown ? <FriendInChat {...data.friendInChat} />  : <header></header> }
 
@@ -199,9 +197,6 @@ function Chat(data: IChatParams) {
               :
               <SendMessageButton onClick = { (e: any) => { e.preventDefault(); sendMessage(); }} />
             }
-            <button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
-              <i className='fa fa-phone'></i>
-            </button>
             <button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
               <i className='fas fa-video'></i>
             </button>
