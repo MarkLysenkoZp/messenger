@@ -28,9 +28,7 @@
                     <input type="file" placeholder="Choose avatar" name="avatar">
                     <img class="profile-avatar" src="<%= user.avatar %>" alt="avatar" />
                 </div> 
-                <div class="field button">
-                    <a href="/" className="logout" type=""> <input value="Back to Chat"></a>
-                </div>
+                
                 <div class="field button">
                     <input type="submit" value="Save Changes">
                 </div>
@@ -38,6 +36,9 @@
         </section>
         <section class="form">
             <form action="/deleteCurrentUser" method="post">
+                <div class="field button">
+                    <a href="/" className="logout">Back to Chat</a>
+                </div>
                 <div class="field button">
                     <input type="submit" value="Delete Account">
                 </div>
