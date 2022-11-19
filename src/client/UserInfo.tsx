@@ -11,10 +11,8 @@ function UserInfo(user: IUserListItem) {
             </div>
         </div>
         <a href="/logout" className="logout">Logout</a>
-        <a href="/profile" className="logout">
-        <i className="fas fa-cog"></i>
-        </a>  
     </header>
   );
 }
+
 export default UserInfo;
