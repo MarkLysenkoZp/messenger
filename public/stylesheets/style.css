@@ -326,6 +326,7 @@ a.right {
   margin-right: auto;
   margin-left: 10px;
   max-width: calc(100% - 130px);
+  position: relative;
 }
 .incoming .details p{
   background: #fff;
@@ -342,8 +343,9 @@ a.right {
 .outgoing .details .massage-actions{
   display: none;
   position: absolute;
-  top: 12px;
-  left: -41px;
+  top: 11px;
+  left: -34px;
+  font-size: 12px;
 }
 
 .outgoing:hover .details .massage-actions{
@@ -494,4 +496,12 @@ a.right {
   margin: 10px;
   width: 24px;
   cursor: pointer;
+}
+
+.edited-status {
+  position: absolute;
+  right: 10px;
+  font-size: 8px;
+  top: 0;
+  color: red;
 }

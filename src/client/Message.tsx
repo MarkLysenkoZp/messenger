@@ -18,6 +18,7 @@ function Message(data: IMessage) {
     <div className={css} key={data.id}>
       { data.isTo ? <img data-testid='fromAvatar' src={data.fromAvatar} alt="" /> : ''}
       <div className="details">
+        {data.status === 'edited' ? <span className="edited-status">edited</span> : ''}
         <p>{data.message}</p>
         { data.isFrom ?
           <div className="massage-actions">

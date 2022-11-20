@@ -92,6 +92,7 @@ class ChatClient {
       clientId: this.clientId,
       date: Date.now(),
       isEditing: true,
+      status: 'edited',
     };
     if(this.targetUsername) {
       msg.target = this.targetUsername;

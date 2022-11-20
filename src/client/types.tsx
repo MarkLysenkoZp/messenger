@@ -32,6 +32,7 @@ export interface IMessage {
   isEditing: boolean;
   isDeleted: boolean;
   fromAvatar: string;
+  status: string;
   setCurrentMessage: Function;
   setDeletedMessage: Function;
 }
