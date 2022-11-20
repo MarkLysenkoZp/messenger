@@ -14,7 +14,7 @@ export const fetchMessages = async (currentUser: IUserListItem, friend: IFriendL
       isEditing: m.isEditing,
       isDeleted: m.isDeleted,
       fromAvatar: m.recipientId == currentUser.id ? friend.avatar : '',
-      status: m.createdAt < m.updatedAt ? 'edited' : '',
+      status: m.status,
       setCurrentMessage: () => {},
       setDeletedMessage: () => {}
     };
