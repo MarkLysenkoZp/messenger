@@ -201,12 +201,13 @@ function Chat(data: IChatParams) {
               <SendMessageButton onClick = { (e: any) => { e.preventDefault(); sendMessage(); }} />
             }
             <button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
-              <i className='fa fa-phone'></i>
-            </button>
-            <button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
               <i className='fas fa-video'></i>
             </button>
           </form>
+
+           //<button onClick={ (e) => { e.preventDefault(); data.chatClient.invite(e) }}>
+         // <i className='fa fa-phone'></i>
+        //</button>
           :
           <div className='typing-area'></div>
         }
@@ -215,5 +216,4 @@ function Chat(data: IChatParams) {
     </div>
   );
 }
-
 export default Chat;
